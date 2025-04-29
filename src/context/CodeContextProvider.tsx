@@ -1,5 +1,5 @@
 "use client";
-import { LanguageKeyType } from "@/lib/utils";
+import { boilerplates, LanguageKeyType } from "@/lib/utils";
 import {
   createContext,
   ReactNode,
@@ -41,9 +41,11 @@ export const CodeContext = createContext({
 });
 
 const CodeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [code, setCode] = useState<string>("");
-  const [fontSize, setFontSize] = useState<number>(16);
   const [language, setLanguage] = useState<LanguageKeyType>("Typescript");
+  const [code, setCode] = useState<string>(
+    boilerplates[language as LanguageKeyType],
+  );
+  const [fontSize, setFontSize] = useState<number>(16);
   const [title, setTitle] = useState<string>("");
   const [input, setInput] = useState<string>("");
   const [result, setResult] = useState<CompileResultType | null>(null);
