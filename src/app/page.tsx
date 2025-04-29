@@ -1,103 +1,229 @@
-import Image from "next/image";
+"use client";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { useTheme } from "@/context/ThemeProvider";
+import Editor from "@monaco-editor/react";
+import { useEffect, useState } from "react";
+import { languages, LanguageKeyType } from "@/lib/utils";
+import LanguageSelector from "@/components/custom/LanguageSelector";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { useCodeContext } from "@/context/CodeContextProvider";
+import RunCode from "@/components/custom/RunCode";
+import { Button } from "@/components/ui/button";
+import FontSizeButtons from "@/components/custom/FontSizeButtons";
+import { LuChevronsLeftRight } from "react-icons/lu";
+import { Textarea } from "@/components/ui/textarea";
+import ResetButton from "@/components/custom/ResetButton";
 
-export default function Home() {
+const Home = () => {
+  const {
+    language,
+    fontSize,
+    code,
+    setCode,
+    input,
+    setInput,
+    result,
+    setResult,
+    expectedOutput,
+    setExpectedOutput,
+  } = useCodeContext();
+  const { theme } = useTheme();
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+
+  const [showTestcaseResult, setShowTestcaseResult] = useState(false);
+
+  useEffect(() => {
+    setShowTestcaseResult(true);
+  }, [result]);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="h-[calc(100vh-48px)] w-full flex flex-col items-center">
+      <ResizablePanelGroup
+        id="editorPanelGroup"
+        direction={isSmallScreen ? "vertical" : "horizontal"}
+        className="w-full h-full grow gap-0.5"
+      >
+        <ResizablePanel
+          id="editorPanel"
+          order={1}
+          defaultSize={70}
+          className="w-full h-full"
+        >
+          <div className="w-full h-full flex flex-col gap-2 dark:bg-[#1e1e1e] p-2">
+            <div className="w-full flex flex-wrap gap-1 sm:gap-4 justify-between sm:justify-start items-center px-0 sm:px-4 ">
+              <LanguageSelector />
+              <FontSizeButtons />
+              <ResetButton />
+              {/* <SaveCodeButton /> */}
+              {/* <DeleteCodeButton /> */}
+              <RunCode />
+            </div>
+            <div className="grow">
+              <Editor
+                defaultLanguage={
+                  languages[language as LanguageKeyType] || "cpp"
+                }
+                language={languages[language as LanguageKeyType]}
+                height="100%"
+                theme={theme === "dark" ? "vs-dark" : "light"}
+                defaultValue=""
+                onChange={value => setCode(value as string)}
+                value={code}
+                options={{
+                  fontSize: fontSize,
+                  placeholder: "Write your code here...",
+                }}
+              />
+            </div>
+          </div>
+        </ResizablePanel>
+        <ResizableHandle
+          id="editorSeparator"
+          className="bg-[#007cc4] dark:bg-neutral-400"
+        >
+          <LuChevronsLeftRight />
+        </ResizableHandle>
+        <ResizablePanel
+          id="panel2"
+          order={2}
+          defaultSize={30}
+          className="w-full h-full"
+        >
+          <ResizablePanelGroup
+            id="ioPanelGroup"
+            direction={isSmallScreen ? "horizontal" : "vertical"}
+            className="w-full h-full gap-0.5"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <ResizablePanel
+              id="inputPanel"
+              order={1}
+              defaultSize={isSmallScreen ? 50 : 30}
+              className="w-full h-full dark:bg-[#1e1e1e]"
+            >
+              <div className="h-full w-full flex flex-col gap-2">
+                <div className="flex items-center justify-between gap-2 p-2">
+                  <h2 className="text-lg italic dark:text-neutral-300">
+                    Input
+                  </h2>
+                </div>
+                <div className="text-sm overflow-auto grow">
+                  <Textarea
+                    placeholder="Type your inputs here ..."
+                    className="bg-transparent min-h-full w-full dark:bg-[#1e1e1e] border-none focus-visible:ring-0 focus-visible:border-none"
+                    value={input}
+                    onChange={e => setInput(e.target.value)}
+                  />
+                </div>
+              </div>
+            </ResizablePanel>
+            <ResizableHandle
+              id="ioSeparator1"
+              className="bg-[#007cc4] dark:bg-neutral-400"
+            >
+              <LuChevronsLeftRight />
+            </ResizableHandle>
+            {!isSmallScreen && (
+              <>
+                <ResizablePanel
+                  id="expectedOutputPanel"
+                  order={2}
+                  defaultSize={isSmallScreen ? 0 : 30}
+                  className="w-full h-full dark:bg-[#1e1e1e]"
+                >
+                  <div className="h-full w-full flex flex-col gap-2">
+                    <div className="flex items-center justify-between p-2 gap-2">
+                      <h2 className="text-lg italic dark:text-neutral-300">
+                        Expected output
+                      </h2>
+                      {showTestcaseResult &&
+                        result?.output &&
+                        expectedOutput && (
+                          <div>
+                            {result.output.trim() === expectedOutput.trim() ? (
+                              <div className="px-3 py-1 text-green-500 rounded-[6px] bg-green-500/20 text-sm">
+                                Passed
+                              </div>
+                            ) : (
+                              <div className="px-3 py-1 text-red-500 rounded-[6px] bg-red-500/20 text-sm">
+                                Failed
+                              </div>
+                            )}
+                          </div>
+                        )}
+                    </div>
+                    <div className="text-sm overflow-auto grow">
+                      <Textarea
+                        placeholder="Type here ..."
+                        className="bg-transparent min-h-full w-full dark:bg-[#1e1e1e] border-none focus-visible:ring-0 focus-visible:border-none"
+                        value={expectedOutput}
+                        onChange={e => {
+                          setExpectedOutput(e.target.value);
+                          setShowTestcaseResult(false);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </ResizablePanel>
+                <ResizableHandle
+                  id="ioSeparator2"
+                  className="bg-[#007cc4] dark:bg-neutral-400"
+                >
+                  <LuChevronsLeftRight />
+                </ResizableHandle>
+              </>
+            )}
+            <ResizablePanel
+              id="outputPanel"
+              order={3}
+              defaultSize={isSmallScreen ? 50 : 40}
+              className="w-full h-full dark:bg-[#1e1e1e]"
+            >
+              <div className="h-full w-full flex flex-col gap-4 p-2">
+                <div className="flex items-center justify-between gap-2">
+                  <h2 className="text-lg italic dark:text-neutral-300">
+                    Output
+                  </h2>
+                  <Button variant="outline" onClick={() => setResult(null)}>
+                    Clear
+                  </Button>
+                </div>
+                <div className="text-sm overflow-auto grow">
+                  {result?.output ? (
+                    result?.output
+                      ?.trim()
+                      ?.split("\n")
+                      ?.map((line: string, index: number) => (
+                        <p key={index}>{line}</p>
+                      ))
+                  ) : (
+                    <p className="text-neutral-400 dark:text-neutral-500">
+                      {`Nothing to show :(`}
+                    </p>
+                  )}
+                </div>
+                {result && (
+                  <div className="flex items-center justify-between text-sm text-neutral-400 dark:text-neutral-500">
+                    <div className="flex items-center gap-2">
+                      <p className="italic">CPU time:</p>
+                      <p>{result?.cpuTime}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <p className="italic">Memory usage:</p>
+                      <p>{result?.memory}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
-}
+};
+
+export default Home;
