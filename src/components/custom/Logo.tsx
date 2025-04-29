@@ -29,13 +29,16 @@ const Logo = ({
         }${size === "lg" ? "size-16" : ""}`}
       />
       {!isMobile && (
-        <p
-          className={`text-white ${size === "sm" ? " text-lg font-[400]" : ""}${
-            size === "md" ? " text-2xl" : ""
-          }${size === "lg" ? " text-4xl" : ""}`}
-        >
-          Codeboxes
-        </p>
+        <div className="flex flex-col text-right justify-center">
+          <p
+            className={`text-white leading-5 ${size === "sm" ? " text-lg font-[400]" : ""}${
+              size === "md" ? " text-2xl" : ""
+            }${size === "lg" ? " text-4xl" : ""}`}
+          >
+            Codeboxes
+          </p>
+          <p className="text-[10px] mr-0.5">by Harsh Priye</p>
+        </div>
       )}
     </div>
   );
