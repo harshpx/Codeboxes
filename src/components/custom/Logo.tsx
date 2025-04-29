@@ -37,7 +37,7 @@ const Logo = ({
           >
             Codeboxes
           </p>
-          <p className="text-[10px] mr-0.5">by Harsh Priye</p>
+          <p className="text-[10px] mr-0.5 text-white">by Harsh Priye</p>
         </div>
       )}
     </div>
