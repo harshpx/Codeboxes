@@ -19,7 +19,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme) {
+    if (storedTheme && (storedTheme === "light" || storedTheme === "dark")) {
       setTheme(storedTheme as "light" | "dark");
     } else {
       const userPrefersDark = window.matchMedia(

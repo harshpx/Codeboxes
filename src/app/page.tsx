@@ -64,9 +64,7 @@ const Home = () => {
             </div>
             <div className="grow">
               <Editor
-                defaultLanguage={
-                  languages[language as LanguageKeyType] || "cpp"
-                }
+                defaultLanguage={languages[language as LanguageKeyType]}
                 language={languages[language as LanguageKeyType]}
                 height="100%"
                 theme={theme === "dark" ? "vs-dark" : "light"}

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { IoPlay } from "react-icons/io5";
 import { jdoodleLanguages, LanguageKeyType } from "@/lib/utils";
 import Loader from "@/components/custom/Loader";
+import { compile } from "@/services/compile";
 
 const RunCode = () => {
   const { code, language, input, setResult, loading, setLoading } =
@@ -11,23 +12,25 @@ const RunCode = () => {
   const runCode = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/compile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          code,
-          language: jdoodleLanguages[language as LanguageKeyType],
-          input,
-        }),
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        setResult(result.data);
+      const response = await compile(
+        code,
+        jdoodleLanguages[language as LanguageKeyType],
+        input,
+      );
+      if (response?.success) {
+        setResult(response.response);
       } else {
-        console.error("Error:", result?.message || "Unknown error");
+        setResult({
+          output: null,
+          error: response?.response || "An error occurred",
+          statusCode: response?.status,
+          memory: "0",
+          cpuTime: "0",
+          compilationStatus: null,
+          projectKey: null,
+          isExecutionSuccess: false,
+          isCompiled: false,
+        });
       }
     } catch (error) {
       console.error("Error:", error);
