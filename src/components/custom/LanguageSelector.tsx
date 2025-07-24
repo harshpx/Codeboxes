@@ -1,4 +1,9 @@
-import { languages, LanguageKeyType, boilerplates } from "@/lib/utils";
+import {
+  languages,
+  LanguageKeyType,
+  boilerplates,
+  currentlySupportedLanguages,
+} from "@/lib/utils";
 import { useState } from "react";
 import {
   Command,
@@ -49,6 +54,11 @@ const LanguageSelector = () => {
             <CommandGroup>
               {Object.keys(languages).map(lang => (
                 <CommandItem
+                  disabled={
+                    !currentlySupportedLanguages.includes(
+                      lang as LanguageKeyType,
+                    )
+                  }
                   key={lang as LanguageKeyType}
                   value={lang as LanguageKeyType}
                   onSelect={currentValue => {

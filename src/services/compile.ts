@@ -1,5 +1,9 @@
-export const compile = async (code: string, language: string, input: string) => {
-  const url: string = "http://localhost:8080/api/compile";
+export const compile = async (
+  code: string,
+  language: string,
+  input: string,
+) => {
+  const url: string = "http://localhost:8080/api/v1/execute";
   const options = {
     method: "POST",
     headers: {
@@ -16,6 +20,8 @@ export const compile = async (code: string, language: string, input: string) => 
   if (response.ok) {
     return data;
   } else {
-    throw new Error(data.message || "An error occurred while compiling the code");
+    throw new Error(
+      data.message || "An error occurred while compiling the code",
+    );
   }
-}
+};

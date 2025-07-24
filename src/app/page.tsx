@@ -203,7 +203,7 @@ const Home = () => {
                     </p>
                   )}
                 </div>
-                {result && (
+                {/* {result && (
                   <div className="flex items-center justify-between text-sm text-neutral-400 dark:text-neutral-500">
                     <div className="flex items-center gap-2">
                       <p className="italic">CPU time:</p>
@@ -214,7 +214,7 @@ const Home = () => {
                       <p>{result?.memory}</p>
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>

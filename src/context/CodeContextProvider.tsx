@@ -8,16 +8,21 @@ import {
   useState,
 } from "react";
 
+// export type jdoodleCompileResultType = {
+//   output: string | null;
+//   error: string | null;
+//   statusCode: number;
+//   memory: string;
+//   cpuTime: string;
+//   compilationStatus: string | null;
+//   projectKey: string | null;
+//   isExecutionSuccess: boolean;
+//   isCompiled: boolean;
+// };
+
 export type CompileResultType = {
   output: string | null;
-  error: string | null;
-  statusCode: number;
-  memory: string;
-  cpuTime: string;
-  compilationStatus: string | null;
-  projectKey: string | null;
-  isExecutionSuccess: boolean;
-  isCompiled: boolean;
+  error: boolean;
 };
 
 /* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
@@ -41,7 +46,7 @@ export const CodeContext = createContext({
 });
 
 const CodeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<LanguageKeyType>("Typescript");
+  const [language, setLanguage] = useState<LanguageKeyType>("Javascript");
   const [code, setCode] = useState<string>(
     boilerplates[language as LanguageKeyType],
   );

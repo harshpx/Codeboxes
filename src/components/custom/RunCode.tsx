@@ -1,7 +1,7 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { Button } from "@/components/ui/button";
 import { IoPlay } from "react-icons/io5";
-import { jdoodleLanguages, LanguageKeyType } from "@/lib/utils";
+import { languageExtensions, LanguageKeyType } from "@/lib/utils";
 import Loader from "@/components/custom/Loader";
 import { compile } from "@/services/compile";
 
@@ -12,24 +12,17 @@ const RunCode = () => {
   const runCode = async () => {
     try {
       setLoading(true);
-      const response = await compile(
+      const res = await compile(
         code,
-        jdoodleLanguages[language as LanguageKeyType],
+        languageExtensions[language as LanguageKeyType],
         input,
       );
-      if (response?.success) {
-        setResult(response.response);
+      if (res?.success) {
+        setResult(res.response);
       } else {
         setResult({
           output: null,
-          error: response?.response || "An error occurred",
-          statusCode: response?.status,
-          memory: "0",
-          cpuTime: "0",
-          compilationStatus: null,
-          projectKey: null,
-          isExecutionSuccess: false,
-          isCompiled: false,
+          error: res?.response?.error || "An error occurred",
         });
       }
     } catch (error) {

@@ -12,6 +12,7 @@ export const languages = {
   C: "c",
   "C#": "csharp",
   Typescript: "typescript",
+  Javascript: "javascript",
   Dart: "dart",
   Kotlin: "kotlin",
   Swift: "swift",
@@ -22,6 +23,7 @@ export const languages = {
   Rust: "rust",
   Ruby: "ruby",
 };
+
 export const jdoodleLanguages = {
   "C++": "cpp17",
   Java: "java",
@@ -29,6 +31,7 @@ export const jdoodleLanguages = {
   C: "c",
   "C#": "csharp",
   Typescript: "typescript",
+  Javascript: "javascript",
   Dart: "dart",
   Kotlin: "kotlin",
   Swift: "swift",
@@ -38,6 +41,25 @@ export const jdoodleLanguages = {
   Bash: "bash",
   Rust: "rust",
   Ruby: "ruby",
+};
+
+export const languageExtensions: Record<string, string> = {
+  "C++": "cpp",
+  Java: "java",
+  Python3: "py",
+  C: "c",
+  "C#": "cs",
+  Typescript: "ts",
+  Javascript: "js",
+  Dart: "dart",
+  Kotlin: "kt",
+  Swift: "swift",
+  Golang: "go",
+  Scala: "scala",
+  R: "r",
+  Bash: "sh",
+  Rust: "rs",
+  Ruby: "rb",
 };
 
 export const boilerplates: Record<LanguageKeyType, string> = {
@@ -93,7 +115,12 @@ class Program {
 
 main();
 `,
-
+  Javascript: `function main() {
+    // Write your code here
+    console.log("Hello, JavaScript!");
+}
+    
+main();`,
   Dart: `void main() {
   // Write your code here
   print('Hello, Dart!');
@@ -149,3 +176,12 @@ puts "Hello, Ruby!"
 };
 
 export type LanguageKeyType = keyof typeof languages;
+
+export const currentlySupportedLanguages: LanguageKeyType[] = [
+  "C",
+  "C++",
+  "Java",
+  "Python3",
+  "Javascript",
+  "Golang",
+];
