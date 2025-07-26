@@ -3,7 +3,7 @@ export const compile = async (
   language: string,
   input: string,
 ) => {
-  const url: string = "http://localhost:8080/api/v1/execute";
+  const url: string = "https://codeboxes.152.42.158.94.nip.io/api/v1/execute";
   const options = {
     method: "POST",
     headers: {
