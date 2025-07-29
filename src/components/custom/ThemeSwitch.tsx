@@ -16,7 +16,7 @@ const ThemeSwitch = () => {
       className="
         rounded-full p-2 cursor-pointer box-border 
         text-white
-        bg-[#007cc4] hover:bg-[#86b6d1]
+        bg-transparent hover:bg-white/50
         border hover:border 
         border-white
       "

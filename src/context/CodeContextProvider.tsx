@@ -1,5 +1,6 @@
 "use client";
-import { boilerplates, LanguageKeyType } from "@/lib/utils";
+import { boilerplates } from "@/lib/utils";
+import { CompileResultType, LanguageKeyType } from "@/lib/types";
 import {
   createContext,
   ReactNode,
@@ -19,11 +20,6 @@ import {
 //   isExecutionSuccess: boolean;
 //   isCompiled: boolean;
 // };
-
-export type CompileResultType = {
-  output: string | null;
-  error: boolean;
-};
 
 /* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 export const CodeContext = createContext({

@@ -1,14 +1,16 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { LanguageKeyType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// monnaco editor languages names
 export const languages = {
   "C++": "cpp",
   Java: "java",
-  Python3: "python",
+  Python: "python",
   C: "c",
   "C#": "csharp",
   Typescript: "typescript",
@@ -24,29 +26,11 @@ export const languages = {
   Ruby: "ruby",
 };
 
-export const jdoodleLanguages = {
-  "C++": "cpp17",
-  Java: "java",
-  Python3: "python3",
-  C: "c",
-  "C#": "csharp",
-  Typescript: "typescript",
-  Javascript: "javascript",
-  Dart: "dart",
-  Kotlin: "kotlin",
-  Swift: "swift",
-  Golang: "golang",
-  Scala: "scala",
-  R: "r",
-  Bash: "bash",
-  Rust: "rust",
-  Ruby: "ruby",
-};
-
-export const languageExtensions: Record<string, string> = {
+// codeboxes api languages names
+export const languageExtensions: Record<LanguageKeyType, string> = {
   "C++": "cpp",
   Java: "java",
-  Python3: "py",
+  Python: "py",
   C: "c",
   "C#": "cs",
   Typescript: "ts",
@@ -81,7 +65,7 @@ int main() {
 }
 `,
 
-  Python3: `def main():
+  Python: `def main():
     # Write your code here
     print("Hello, Python!")
 
@@ -175,13 +159,13 @@ puts "Hello, Ruby!"
 `,
 };
 
-export type LanguageKeyType = keyof typeof languages;
-
 export const currentlySupportedLanguages: LanguageKeyType[] = [
   "C",
   "C++",
   "Java",
-  "Python3",
+  "Python",
   "Javascript",
   "Golang",
 ];
+
+export const baseUrl = "https://codeboxes.152.42.158.94.nip.io";

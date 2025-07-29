@@ -26,7 +26,6 @@ export default function RootLayout({
         <ThemeProvider>
           <CodeContextProvider>
             <div className="min-h-screen min-w-full flex flex-col">
-              <Header />
               {children}
             </div>
           </CodeContextProvider>
