@@ -11,7 +11,7 @@ import {
 } from "react";
 
 export type CompileResultType = {
-  output: string;
+  output: string | null;
   error: boolean;
 };
 
