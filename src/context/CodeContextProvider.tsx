@@ -1,25 +1,19 @@
 "use client";
 import { boilerplates } from "@/lib/utils";
-import { CompileResultType, LanguageKeyType } from "@/lib/types";
+import { LanguageKeyType } from "@/lib/utils";
 import {
   createContext,
-  ReactNode,
+  FC,
+  PropsWithChildren,
   useContext,
   useEffect,
   useState,
 } from "react";
 
-// export type jdoodleCompileResultType = {
-//   output: string | null;
-//   error: string | null;
-//   statusCode: number;
-//   memory: string;
-//   cpuTime: string;
-//   compilationStatus: string | null;
-//   projectKey: string | null;
-//   isExecutionSuccess: boolean;
-//   isCompiled: boolean;
-// };
+export type CompileResultType = {
+  output: string;
+  error: boolean;
+};
 
 /* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 export const CodeContext = createContext({
@@ -41,7 +35,7 @@ export const CodeContext = createContext({
   setLoading: (loading: boolean) => {},
 });
 
-const CodeContextProvider = ({ children }: { children: ReactNode }) => {
+const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [language, setLanguage] = useState<LanguageKeyType>("Javascript");
   const [code, setCode] = useState<string>(
     boilerplates[language as LanguageKeyType],

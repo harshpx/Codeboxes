@@ -4,7 +4,7 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
 import { currentlySupportedLanguages, languageExtensions } from "@/lib/utils";
-import { LanguageKeyType } from "@/lib/types";
+import { LanguageKeyType } from "@/lib/utils";
 import StyledButton from "@/components/custom/StyledButton";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";

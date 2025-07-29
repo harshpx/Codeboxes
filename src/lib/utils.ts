@@ -1,6 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { LanguageKeyType } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,6 +24,8 @@ export const languages = {
   Rust: "rust",
   Ruby: "ruby",
 };
+
+export type LanguageKeyType = keyof typeof languages;
 
 // codeboxes api languages names
 export const languageExtensions: Record<LanguageKeyType, string> = {

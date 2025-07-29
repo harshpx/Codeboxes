@@ -1,8 +1,8 @@
 import {
   languages,
-  LanguageKeyType,
   boilerplates,
   currentlySupportedLanguages,
+  LanguageKeyType,
 } from "@/lib/utils";
 import { useState } from "react";
 import {
