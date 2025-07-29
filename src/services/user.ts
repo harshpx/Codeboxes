@@ -5,7 +5,7 @@ export const registerUser = async (
   email: string,
   password: string,
 ) => {
-  let url = `${baseUrl}/api/v1/users/register`;
+  const url = `${baseUrl}/api/v1/users/register`;
   const options = {
     method: "POST",
     headers: {
@@ -22,7 +22,7 @@ export const registerUser = async (
 };
 
 export const loginUser = async (identifier: string, password: string) => {
-  let url = `${baseUrl}/api/v1/users/login`;
+  const url = `${baseUrl}/api/v1/users/login`;
   const options = {
     method: "POST",
     headers: {

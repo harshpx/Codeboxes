@@ -1,5 +1,5 @@
 "use client";
-import { FC, PropsWithChildren, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 type StyledButtonProps = {
   children: ReactNode;

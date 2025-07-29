@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ReactNode } from "react";
 import "./globals.css";
 import ThemeProvider from "@/context/ThemeProvider";
-import Header from "@/components/custom/Header";
 import CodeContextProvider from "@/context/CodeContextProvider";
 
 export const metadata: Metadata = {

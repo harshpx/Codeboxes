@@ -1,11 +1,8 @@
 "use client";
 
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
-import { SparklesCore } from "@/components/ui/sparkles";
-import { Spotlight } from "@/components/ui/spotlight-new";
 import { currentlySupportedLanguages, languageExtensions } from "@/lib/utils";
 import { LanguageKeyType } from "@/lib/types";
 import StyledButton from "@/components/custom/StyledButton";
