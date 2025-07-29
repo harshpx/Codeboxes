@@ -8,7 +8,7 @@ import { useTheme } from "@/context/ThemeProvider";
 import Editor from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 import { languages } from "@/lib/utils";
-import { LanguageKeyType } from "@/lib/types";
+import { LanguageKeyType } from "@/lib/utils";
 import LanguageSelector from "@/components/custom/LanguageSelector";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useCodeContext } from "@/context/CodeContextProvider";
