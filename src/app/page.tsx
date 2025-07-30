@@ -8,16 +8,22 @@ import StyledButton from "@/components/custom/StyledButton";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ThemeSwitch2 from "@/components/custom/ThemeSwitch2";
+import Logo from "@/components/custom/Logo";
 
 const Home = () => {
   const router = useRouter();
   return (
     <BackgroundLines
       svgOptions={{ duration: 2 }}
-      className="relative flex flex-col justify-center items-center grow"
+      className="grow relative flex flex-col justify-center items-center"
     >
-      <div className="z-10 absolute top-4 right-4 transition-all duration-400 ease-in-out">
-        <ThemeSwitch2 />
+      <div className="absolute top-2 left-0 w-full justify-self-start h-[48px] px-4 py-2 gap-2 flex items-center justify-between bg-transparent">
+        <div className="z-10 transition-all duration-400 ease-in-out px-2 py-1 rounded-xl bg-gradient-to-r from-purple-400 to-[#007cc4] dark:bg-transparent">
+          <Logo size="sm" style="inline" />
+        </div>
+        <div className="z-10 transition-all duration-400 ease-in-out">
+          <ThemeSwitch2 />
+        </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="flex items-baseline gap-5">

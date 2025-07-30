@@ -7,12 +7,14 @@ type GradientShiftTextProps = {
   children: string;
   textClassName?: string;
   containerClassName?: string;
+  duration?: number;
 };
 
 const GradientTextShift: FC<GradientShiftTextProps> = ({
   children,
   textClassName = "text-5xl font-[500]",
-  containerClassName = "",
+  containerClassName,
+  duration = 1,
 }) => {
   return (
     <motion.span
@@ -21,7 +23,7 @@ const GradientTextShift: FC<GradientShiftTextProps> = ({
         backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
       }}
       transition={{
-        duration: 1,
+        duration,
         repeat: Infinity,
         ease: "linear",
       }}
