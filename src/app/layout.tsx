@@ -22,17 +22,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
-        <ThemeProvider>
-          <AuthContextProvider>
-            <CodeContextProvider>
-              <div className="min-h-screen min-w-full flex flex-col">
+      <ThemeProvider>
+        <AuthContextProvider>
+          <CodeContextProvider>
+            <body
+              className={`antialiased transition-all duration-400 ease-in-out`}
+            >
+              <div className="min-h-screen min-w-full flex flex-col bg-white dark:bg-[#1e1e1e]">
                 {children}
               </div>
-            </CodeContextProvider>
-          </AuthContextProvider>
-        </ThemeProvider>
-      </body>
+            </body>
+          </CodeContextProvider>
+        </AuthContextProvider>
+      </ThemeProvider>
     </html>
   );
 }

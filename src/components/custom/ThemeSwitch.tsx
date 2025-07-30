@@ -2,8 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "@/context/ThemeProvider";
+import { FC } from "react";
 
-const ThemeSwitch = () => {
+const ThemeSwitch: FC = () => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {

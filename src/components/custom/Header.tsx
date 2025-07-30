@@ -4,7 +4,7 @@ import ThemeSwitch from "./ThemeSwitch";
 
 const Header = () => {
   return (
-    <header className="w-full h-[48px] px-4 gap-2 flex items-center justify-between bg-[#007cc4]">
+    <header className="w-full h-[48px] px-4 gap-2 flex items-center justify-between bg-gradient-to-r from-sky-500 via-[#007cc4] to-purple-500">
       <Logo size="sm" style="inline" />
       {/* <div className="w-[80%]">
         <TitleInput />

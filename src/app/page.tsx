@@ -1,5 +1,4 @@
 "use client";
-
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
@@ -8,14 +7,18 @@ import { LanguageKeyType } from "@/lib/utils";
 import StyledButton from "@/components/custom/StyledButton";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import ThemeSwitch2 from "@/components/custom/ThemeSwitch2";
 
 const Home = () => {
   const router = useRouter();
   return (
     <BackgroundLines
       svgOptions={{ duration: 2 }}
-      className="flex flex-col justify-center items-center grow"
+      className="relative flex flex-col justify-center items-center grow"
     >
+      <div className="z-10 absolute top-4 right-4 transition-all duration-400 ease-in-out">
+        <ThemeSwitch2 />
+      </div>
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="flex items-baseline gap-5">
           <div className="text-3xl">Run</div>
@@ -34,7 +37,9 @@ const Home = () => {
         </div>
         <div className="flex items-center gap-4">
           {/* add buttons here */}
-          <StyledButton>Login/Register</StyledButton>
+          <StyledButton onClick={() => router.push("/auth")}>
+            Login/Register
+          </StyledButton>
           <StyledButton onClick={() => router.push("/editor")}>
             Try out now <ArrowRight />
           </StyledButton>
