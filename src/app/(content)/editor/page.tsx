@@ -8,7 +8,6 @@ import { useTheme } from "@/context/ThemeProvider";
 import Editor from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 import { languages } from "@/lib/utils";
-import { LanguageKeyType } from "@/lib/utils";
 import LanguageSelector from "@/components/custom/LanguageSelector";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useCodeContext } from "@/context/CodeContextProvider";
@@ -21,20 +20,15 @@ import ResetButton from "@/components/custom/ResetButton";
 
 const Page = () => {
   const {
-    language,
-    fontSize,
-    code,
-    setCode,
-    input,
-    setInput,
+    codeObject,
+    setCodeObject,
+    editorSettings,
+    setEditorSettings,
     result,
     setResult,
-    expectedOutput,
-    setExpectedOutput,
   } = useCodeContext();
   const { theme } = useTheme();
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
-
   const [showTestcaseResult, setShowTestcaseResult] = useState(false);
 
   useEffect(() => {
@@ -55,7 +49,7 @@ const Page = () => {
           className="w-full h-full"
         >
           <div className="w-full h-full flex flex-col gap-2 dark:bg-[#1e1e1e] p-2">
-            <div className="w-full flex flex-wrap gap-1 sm:gap-4 justify-between sm:justify-start items-center px-0 sm:px-4 ">
+            <div className="w-full flex flex-wrap gap-2 sm:gap-4 justify-start items-center px-0 sm:px-1">
               <LanguageSelector />
               <FontSizeButtons />
               <ResetButton />
@@ -63,17 +57,19 @@ const Page = () => {
               {/* <DeleteCodeButton /> */}
               <RunCode />
             </div>
-            <div className="grow">
+            <div className="relative grow">
               <Editor
-                defaultLanguage={languages[language as LanguageKeyType]}
-                language={languages[language as LanguageKeyType]}
+                defaultLanguage={languages[codeObject.language]}
+                language={languages[codeObject.language]}
                 height="100%"
                 theme={theme === "dark" ? "vs-dark" : "light"}
                 defaultValue=""
-                onChange={value => setCode(value as string)}
-                value={code}
+                onChange={value =>
+                  setCodeObject({ ...codeObject, code: value || "" })
+                }
+                value={codeObject.code}
                 options={{
-                  fontSize: fontSize,
+                  fontSize: editorSettings.fontSize,
                   placeholder: "Write your code here...",
                 }}
               />
@@ -113,8 +109,13 @@ const Page = () => {
                   <Textarea
                     placeholder="Type your inputs here ..."
                     className="bg-transparent min-h-full w-full dark:bg-[#1e1e1e] border-none focus-visible:ring-0 focus-visible:border-none"
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
+                    value={codeObject.input}
+                    onChange={e =>
+                      setCodeObject({
+                        ...codeObject,
+                        input: e.target.value || "",
+                      })
+                    }
                   />
                 </div>
               </div>
@@ -140,9 +141,10 @@ const Page = () => {
                       </h2>
                       {showTestcaseResult &&
                         result?.output &&
-                        expectedOutput && (
+                        editorSettings.expectedOutput && (
                           <div>
-                            {result.output.trim() === expectedOutput.trim() ? (
+                            {result.output.trim() ===
+                            editorSettings.expectedOutput.trim() ? (
                               <div className="px-3 py-1 text-green-500 rounded-[6px] bg-green-500/20 text-sm">
                                 Passed
                               </div>
@@ -158,9 +160,12 @@ const Page = () => {
                       <Textarea
                         placeholder="Type here ..."
                         className="bg-transparent min-h-full w-full dark:bg-[#1e1e1e] border-none focus-visible:ring-0 focus-visible:border-none"
-                        value={expectedOutput}
+                        value={editorSettings.expectedOutput}
                         onChange={e => {
-                          setExpectedOutput(e.target.value);
+                          setEditorSettings({
+                            ...editorSettings,
+                            expectedOutput: e.target.value || "",
+                          });
                           setShowTestcaseResult(false);
                         }}
                       />
@@ -196,7 +201,12 @@ const Page = () => {
                       ?.trim()
                       ?.split("\n")
                       ?.map((line: string, index: number) => (
-                        <p key={index}>{line}</p>
+                        <p
+                          key={index}
+                          className={`${result.error ? "text-red-500" : ""}`}
+                        >
+                          {line}
+                        </p>
                       ))
                   ) : (
                     <p className="text-neutral-400 dark:text-neutral-500">

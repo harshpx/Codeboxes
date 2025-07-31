@@ -25,7 +25,7 @@ import { useCodeContext } from "@/context/CodeContextProvider";
 
 const LanguageSelector = () => {
   const [open, setOpen] = useState(false);
-  const { language, setLanguage, setCode } = useCodeContext();
+  const { codeObject, setCodeObject } = useCodeContext();
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -36,7 +36,7 @@ const LanguageSelector = () => {
           size={"sm"}
           className="w-[150px] justify-between"
         >
-          {language}
+          {codeObject.language}
           <HiChevronUpDown className="shrink-0" />
         </Button>
       </PopoverTrigger>
@@ -62,14 +62,17 @@ const LanguageSelector = () => {
                   key={lang as LanguageKeyType}
                   value={lang as LanguageKeyType}
                   onSelect={currentValue => {
-                    setLanguage(currentValue as LanguageKeyType);
-                    setCode(boilerplates[currentValue as LanguageKeyType]);
+                    setCodeObject({
+                      ...codeObject,
+                      language: currentValue as LanguageKeyType,
+                      code: boilerplates[currentValue as LanguageKeyType],
+                    });
                     setOpen(false);
                   }}
                 >
                   {lang}
                   <HiCheck
-                    className={`ml-auto ${language === lang ? "opacity-100" : "opacity-0"}`}
+                    className={`ml-auto ${codeObject.language === lang ? "opacity-100" : "opacity-0"}`}
                   />
                 </CommandItem>
               ))}

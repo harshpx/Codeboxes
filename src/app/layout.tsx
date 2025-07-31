@@ -4,14 +4,15 @@ import "./globals.css";
 import ThemeProvider from "@/context/ThemeProvider";
 import CodeContextProvider from "@/context/CodeContextProvider";
 import AuthContextProvider from "@/context/AuthContextProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Codeboxes",
   description: "Online code editor designed for competitive programmers",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/icon.avif",
+    shortcut: "/icon.avif",
+    apple: "/icon.avif",
   },
 };
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             >
               <div className="min-h-screen min-w-full flex flex-col bg-white dark:bg-[#1e1e1e]">
                 {children}
+                <Toaster />
               </div>
             </body>
           </CodeContextProvider>

@@ -10,6 +10,19 @@ import {
   useState,
 } from "react";
 
+export type CodeObjectType = {
+  id: string;
+  code: string;
+  language: LanguageKeyType;
+  input: string;
+  title: string;
+};
+
+export type EditorSettingsType = {
+  fontSize: number;
+  expectedOutput: string;
+};
+
 export type CompileResultType = {
   output: string | null;
   error: boolean;
@@ -17,77 +30,65 @@ export type CompileResultType = {
 
 /* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 export const CodeContext = createContext({
-  code: "",
-  setCode: (code: string) => {},
-  fontSize: 14,
-  setFontSize: (fontSize: number) => {},
-  language: "C++",
-  setLanguage: (language: LanguageKeyType) => {},
-  title: "",
-  setTitle: (title: string) => {},
-  input: "",
-  setInput: (input: string) => {},
-  result: {} as CompileResultType | null,
+  codeObject: {
+    id: "",
+    code: boilerplates["Javascript"],
+    language: "Javascript",
+    input: "",
+    title: "",
+  } as CodeObjectType,
+  setCodeObject: (codeObject: CodeObjectType) => {},
+  editorSettings: {
+    fontSize: 16,
+    expectedOutput: "",
+  } as EditorSettingsType,
+  setEditorSettings: (settings: EditorSettingsType) => {},
+  result: null as CompileResultType | null,
   setResult: (result: CompileResultType | null) => {},
-  expectedOutput: "",
-  setExpectedOutput: (expectedOutput: string) => {},
   loading: false,
   setLoading: (loading: boolean) => {},
 });
 
 const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [language, setLanguage] = useState<LanguageKeyType>("Javascript");
-  const [code, setCode] = useState<string>(
-    boilerplates[language as LanguageKeyType],
-  );
-  const [fontSize, setFontSize] = useState<number>(16);
-  const [title, setTitle] = useState<string>("");
-  const [input, setInput] = useState<string>("");
+  const [codeObject, setCodeObject] = useState<CodeObjectType>({
+    id: "",
+    code: boilerplates["Javascript"],
+    language: "Javascript",
+    input: "",
+    title: "",
+  });
+  const [editorSettings, setEditorSettings] = useState<EditorSettingsType>({
+    fontSize: 16,
+    expectedOutput: "",
+  });
   const [result, setResult] = useState<CompileResultType | null>(null);
-  const [expectedOutput, setExpectedOutput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     try {
-      const storedCode = localStorage.getItem("code");
-      const storedLanguage = localStorage.getItem("language");
-      const storedFontSize = localStorage.getItem("fontSize");
-      const storedTitle = localStorage.getItem("title");
-      const storedInput = localStorage.getItem("input");
+      const storedCodeObject = localStorage.getItem("codeObject");
+      const storedEditorSettings = localStorage.getItem("editorSettings");
 
-      if (storedCode) setCode(JSON.parse(storedCode));
-      if (storedLanguage) setLanguage(JSON.parse(storedLanguage));
-      if (storedFontSize) setFontSize(JSON.parse(storedFontSize));
-      if (storedTitle) setTitle(JSON.parse(storedTitle));
-      if (storedInput) setInput(storedInput);
+      if (storedCodeObject) setCodeObject(JSON.parse(storedCodeObject));
+      if (storedEditorSettings)
+        setEditorSettings(JSON.parse(storedEditorSettings));
     } catch (error) {
       console.error("Error parsing localStorage data:", error);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("code", JSON.stringify(code));
-    localStorage.setItem("language", JSON.stringify(language));
-    localStorage.setItem("fontSize", JSON.stringify(fontSize));
-    localStorage.setItem("title", JSON.stringify(title));
-    localStorage.setItem("input", input);
-  }, [code, language, fontSize, title, input]);
+    localStorage.setItem("codeObject", JSON.stringify(codeObject));
+    localStorage.setItem("editorSettings", JSON.stringify(editorSettings));
+  }, [codeObject, editorSettings]);
 
   return (
     <CodeContext.Provider
       value={{
-        code,
-        setCode,
-        fontSize,
-        setFontSize,
-        language,
-        setLanguage,
-        title,
-        setTitle,
-        input,
-        setInput,
-        expectedOutput,
-        setExpectedOutput,
+        codeObject,
+        setCodeObject,
+        editorSettings,
+        setEditorSettings,
         result,
         setResult,
         loading,

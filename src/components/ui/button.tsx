@@ -54,8 +54,6 @@ function Button({
       {...props}
       style={{
         cursor: "pointer",
-        height: "32px",
-        width: "auto",
         ...props.style,
       }}
     />
