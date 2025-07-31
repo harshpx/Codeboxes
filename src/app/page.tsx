@@ -18,7 +18,7 @@ const Home = () => {
       className="grow relative flex flex-col justify-center items-center"
     >
       <div className="absolute top-2 left-0 w-full justify-self-start h-[48px] px-4 py-2 gap-2 flex items-center justify-between bg-transparent">
-        <Logo size="sm" style="inline"/>
+        <Logo size="sm" style="inline" />
         <div className="z-10 transition-all duration-400 ease-in-out">
           <ThemeSwitch2 />
         </div>
