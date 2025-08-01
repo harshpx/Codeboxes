@@ -8,23 +8,29 @@ import { materialLight, materialDark } from "react-syntax-highlighter/dist/cjs/s
 import { syntaxHighlighterLanguage } from "@/lib/utils";
 
 type CodeCardProps = {
-  codeObject: CodeObjectType;
+  codeObject?: CodeObjectType;
 };
 
 const CodeCard: FC<CodeCardProps> = ({ codeObject }) => {
   const { theme } = useTheme();
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>{codeObject.title}</CardTitle>
-      </CardHeader>
+      {codeObject && (
+        <CardHeader>
+          <CardTitle>{codeObject.title}</CardTitle>
+        </CardHeader>
+      )}
       <CardContent>
-        <SyntaxHighlighter
-          language={syntaxHighlighterLanguage[codeObject.language]}
-          style={theme === "dark" ? materialDark : materialLight}
-        >
-          {codeObject.code}
-        </SyntaxHighlighter>
+        {codeObject ? (
+          <SyntaxHighlighter
+            language={syntaxHighlighterLanguage[codeObject.language]}
+            style={theme === "dark" ? materialDark : materialLight}
+          >
+            {codeObject.code}
+          </SyntaxHighlighter>
+        ) : (
+          <div></div>
+        )}
       </CardContent>
     </Card>
   );

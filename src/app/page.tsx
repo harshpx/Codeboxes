@@ -8,9 +8,19 @@ import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ThemeSwitch2 from "@/components/custom/ThemeSwitch2";
 import Logo from "@/components/custom/Logo";
+import { useAuthContext } from "@/context/AuthContextProvider";
+import { useEffect } from "react";
 
 const Home = () => {
   const router = useRouter();
+  const { isAuthorized } = useAuthContext();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      router.push("/dashboard");
+    }
+  }, [isAuthorized]);
+
   return (
     <BackgroundLines
       svgOptions={{ duration: 2 }}

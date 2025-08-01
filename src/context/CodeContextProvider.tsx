@@ -20,15 +20,17 @@ export type CompileResultType = {
   error: boolean;
 };
 
+export const defaultCodeObject: CodeObjectType = {
+  id: "",
+  code: boilerplates["js"],
+  language: "js",
+  input: "",
+  title: "",
+};
+
 /* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 export const CodeContext = createContext({
-  codeObject: {
-    id: "",
-    code: boilerplates["js"],
-    language: "js",
-    input: "",
-    title: "",
-  } as CodeObjectType,
+  codeObject: defaultCodeObject,
   setCodeObject: (codeObject: CodeObjectType) => {},
   editorSettings: {
     fontSize: 16,
@@ -42,13 +44,7 @@ export const CodeContext = createContext({
 });
 
 const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [codeObject, setCodeObject] = useState<CodeObjectType>({
-    id: "",
-    code: boilerplates["js"],
-    language: "js",
-    input: "",
-    title: "",
-  });
+  const [codeObject, setCodeObject] = useState<CodeObjectType>(defaultCodeObject);
   const [editorSettings, setEditorSettings] = useState<EditorSettingsType>({
     fontSize: 16,
     expectedOutput: "",
