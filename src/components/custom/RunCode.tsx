@@ -1,7 +1,6 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { Button } from "@/components/ui/button";
 import { IoPlay } from "react-icons/io5";
-import { languageExtensions } from "@/lib/utils";
 import Loader from "@/components/custom/Loader";
 import { compile } from "@/services/compile";
 import { toast } from "sonner";
@@ -12,11 +11,7 @@ const RunCode = () => {
   const runCode = async () => {
     try {
       setLoading(true);
-      const res = await compile(
-        codeObject.code,
-        languageExtensions[codeObject.language],
-        codeObject.input,
-      );
+      const res = await compile(codeObject.code, codeObject.language, codeObject.input);
       if (res?.success) {
         setResult(res.response);
         toast.success("Compilation successful!", {

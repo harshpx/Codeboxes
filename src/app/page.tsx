@@ -2,8 +2,7 @@
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
-import { currentlySupportedLanguages, languageExtensions } from "@/lib/utils";
-import { LanguageKeyType } from "@/lib/utils";
+import { currentlySupportedLanguages } from "@/lib/utils";
 import StyledButton from "@/components/custom/StyledButton";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -29,9 +28,7 @@ const Home = () => {
           <FlipWords
             duration={1000}
             className="text-3xl text-white px-2 py-2 rounded-xl bg-gradient-to-r from-[#007cc4] to-purple-500"
-            words={currentlySupportedLanguages.map(
-              lang => `.${languageExtensions[lang as LanguageKeyType]}`,
-            )}
+            words={currentlySupportedLanguages.map(lang => `.${lang}`)}
           />
           <div className="text-3xl">code</div>
         </div>

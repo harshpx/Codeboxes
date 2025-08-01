@@ -3,7 +3,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/componen
 import { useTheme } from "@/context/ThemeProvider";
 import Editor from "@monaco-editor/react";
 import { useEffect, useState } from "react";
-import { languages } from "@/lib/utils";
+import { monacoLanguage } from "@/lib/utils";
 import LanguageSelector from "@/components/custom/LanguageSelector";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useCodeContext } from "@/context/CodeContextProvider";
@@ -44,8 +44,8 @@ const Page = () => {
             </div>
             <div className="relative grow">
               <Editor
-                defaultLanguage={languages[codeObject.language]}
-                language={languages[codeObject.language]}
+                defaultLanguage={monacoLanguage[codeObject.language]}
+                language={monacoLanguage[codeObject.language]}
                 height="100%"
                 theme={theme === "dark" ? "vs-dark" : "light"}
                 defaultValue=""

@@ -6,49 +6,82 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // monnaco editor languages names
-export const languages = {
-  "C++": "cpp",
-  Java: "java",
-  Python: "python",
-  C: "c",
-  "C#": "csharp",
-  Typescript: "typescript",
-  Javascript: "javascript",
-  Dart: "dart",
-  Kotlin: "kotlin",
-  Swift: "swift",
-  Golang: "go",
-  Scala: "scala",
-  R: "r",
-  Bash: "shell",
-  Rust: "rust",
-  Ruby: "ruby",
+export const languages = [
+  "cpp",
+  "java",
+  "py",
+  "c",
+  "cs",
+  "ts",
+  "js",
+  "dart",
+  "kt",
+  "swift",
+  "go",
+  "scala",
+  "sh",
+  "rs",
+  "rb",
+] as const;
+
+export type LanguageType = (typeof languages)[number];
+
+export const languageLabels: Record<LanguageType, string> = {
+  cpp: "C++",
+  java: "Java",
+  py: "Python",
+  c: "C",
+  cs: "C#",
+  ts: "Typescript",
+  js: "Javascript",
+  dart: "Dart",
+  kt: "Kotlin",
+  swift: "Swift",
+  go: "Golang",
+  scala: "Scala",
+  sh: "Bash",
+  rs: "Rust",
+  rb: "Ruby",
 };
 
-export type LanguageKeyType = keyof typeof languages;
-
-// codeboxes api languages names
-export const languageExtensions: Record<LanguageKeyType, string> = {
-  "C++": "cpp",
-  Java: "java",
-  Python: "py",
-  C: "c",
-  "C#": "cs",
-  Typescript: "ts",
-  Javascript: "js",
-  Dart: "dart",
-  Kotlin: "kt",
-  Swift: "swift",
-  Golang: "go",
-  Scala: "scala",
-  R: "r",
-  Bash: "sh",
-  Rust: "rs",
-  Ruby: "rb",
+export const monacoLanguage: Record<LanguageType, string> = {
+  cpp: "cpp",
+  java: "java",
+  py: "python",
+  c: "c",
+  cs: "csharp",
+  ts: "typescript",
+  js: "javascript",
+  dart: "dart",
+  kt: "kotlin",
+  swift: "swift",
+  go: "go",
+  scala: "scala",
+  sh: "shell",
+  rs: "rust",
+  rb: "ruby",
 };
 
-export const boilerplates: Record<LanguageKeyType, string> = {
-  "C++": `#include <iostream>
+export const syntaxHighlighterLanguage: Record<LanguageType, string> = {
+  cpp: "cpp",
+  java: "java",
+  py: "python",
+  c: "c",
+  cs: "csharp",
+  ts: "typescript",
+  js: "javascript",
+  dart: "dart",
+  kt: "kotlin",
+  swift: "swift",
+  go: "go",
+  scala: "scala",
+  sh: "bash",
+  rs: "rust",
+  rb: "ruby",
+};
+
+export const boilerplates: Record<LanguageType, string> = {
+  cpp: `#include <iostream>
 using namespace std;
 
 int main() {
@@ -58,7 +91,7 @@ int main() {
 }
 `,
 
-  Java: `public class Main {
+  java: `public class Main {
     public static void main(String[] args) {
         // Write your code here
         System.out.println("Hello, Java!");
@@ -66,7 +99,7 @@ int main() {
 }
 `,
 
-  Python: `def main():
+  py: `def main():
     # Write your code here
     print("Hello, Python!")
 
@@ -74,7 +107,7 @@ if __name__ == "__main__":
     main()
 `,
 
-  C: `#include <stdio.h>
+  c: `#include <stdio.h>
 
 int main() {
     // Write your code here
@@ -83,7 +116,7 @@ int main() {
 }
 `,
 
-  "C#": `using System;
+  cs: `using System;
 
 class Program {
     static void Main() {
@@ -93,38 +126,38 @@ class Program {
 }
 `,
 
-  Typescript: `function main(): void {
+  ts: `function main(): void {
     // Write your code here
     console.log("Hello, TypeScript!");
 }
 
 main();
 `,
-  Javascript: `function main() {
+  js: `function main() {
     // Write your code here
     console.log("Hello, JavaScript!");
 }
     
 main();`,
-  Dart: `void main() {
+  dart: `void main() {
   // Write your code here
   print('Hello, Dart!');
 }
 `,
 
-  Kotlin: `fun main() {
+  kt: `fun main() {
     // Write your code here
     println("Hello, Kotlin!")
 }
 `,
 
-  Swift: `import Foundation
+  swift: `import Foundation
 
 // Write your code here
 print("Hello, Swift!")
 `,
 
-  Golang: `package main
+  go: `package main
 
 import "fmt"
 
@@ -134,39 +167,28 @@ func main() {
 }
 `,
 
-  Scala: `object Main extends App {
+  scala: `object Main extends App {
   // Write your code here
   println("Hello, Scala!")
 }
 `,
 
-  R: `# Write your code here
-print("Hello, R!")
-`,
-
-  Bash: `#!/bin/bash
+  sh: `#!/bin/bash
 # Write your code here
 echo "Hello, Bash!"
 `,
 
-  Rust: `fn main() {
+  rs: `fn main() {
     // Write your code here
     println!("Hello, Rust!");
 }
 `,
 
-  Ruby: `# Write your code here
+  rb: `# Write your code here
 puts "Hello, Ruby!"
 `,
 };
 
-export const currentlySupportedLanguages: LanguageKeyType[] = [
-  "C",
-  "C++",
-  "Java",
-  "Python",
-  "Javascript",
-  "Golang",
-];
+export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js", "go"];
 
 export const baseUrl = "https://codeboxes.152.42.158.94.nip.io";

@@ -1,6 +1,7 @@
 "use client";
 import { createContext, FC, PropsWithChildren, useContext, useEffect, useState } from "react";
 import { setCookie, getCookie, removeCookie } from "typescript-cookie";
+import { CodeObjectType } from "./CodeContextProvider";
 
 export type UserType = {
   id: string;
@@ -13,16 +14,20 @@ export type UserType = {
 export const AuthContext = createContext({
   user: null as UserType | null,
   setUser: (user: UserType | null) => {},
+  codeList: null as CodeObjectType[] | null,
+  setCodeList: (codeList: CodeObjectType[] | null) => {},
   logout: () => {},
   isAuthorized: false,
 });
 
 const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<UserType | null>(null);
+  const [codeList, setCodeList] = useState<CodeObjectType[] | null>(null);
 
   const logout = () => {
     removeCookie("user");
     setUser(null);
+    setCodeList(null);
   };
 
   useEffect(() => {
@@ -45,7 +50,7 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const isAuthorized = !!user && !!user.token;
 
   return (
-    <AuthContext.Provider value={{ user, setUser, logout, isAuthorized }}>
+    <AuthContext.Provider value={{ user, setUser, codeList, setCodeList, logout, isAuthorized }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,12 +1,11 @@
 "use client";
-import { boilerplates } from "@/lib/utils";
-import { LanguageKeyType } from "@/lib/utils";
+import { boilerplates, LanguageType } from "@/lib/utils";
 import { createContext, FC, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 export type CodeObjectType = {
   id: string;
   code: string;
-  language: LanguageKeyType;
+  language: LanguageType;
   input: string;
   title: string;
 };
@@ -25,8 +24,8 @@ export type CompileResultType = {
 export const CodeContext = createContext({
   codeObject: {
     id: "",
-    code: boilerplates["Javascript"],
-    language: "Javascript",
+    code: boilerplates["js"],
+    language: "js",
     input: "",
     title: "",
   } as CodeObjectType,
@@ -45,8 +44,8 @@ export const CodeContext = createContext({
 const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [codeObject, setCodeObject] = useState<CodeObjectType>({
     id: "",
-    code: boilerplates["Javascript"],
-    language: "Javascript",
+    code: boilerplates["js"],
+    language: "js",
     input: "",
     title: "",
   });

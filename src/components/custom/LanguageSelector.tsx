@@ -1,4 +1,10 @@
-import { languages, boilerplates, currentlySupportedLanguages, LanguageKeyType } from "@/lib/utils";
+import {
+  languages,
+  boilerplates,
+  currentlySupportedLanguages,
+  LanguageType,
+  languageLabels,
+} from "@/lib/utils";
 import { useState } from "react";
 import {
   Command,
@@ -27,7 +33,7 @@ const LanguageSelector = () => {
           size={"sm"}
           className="w-[150px] justify-between"
         >
-          {codeObject.language}
+          {languageLabels[codeObject.language]}
           <HiChevronUpDown className="shrink-0" />
         </Button>
       </PopoverTrigger>
@@ -41,21 +47,21 @@ const LanguageSelector = () => {
           <CommandList>
             <CommandEmpty className="opacity-50 p-1 text-sm">No language found.</CommandEmpty>
             <CommandGroup>
-              {Object.keys(languages).map(lang => (
+              {languages.map(lang => (
                 <CommandItem
-                  disabled={!currentlySupportedLanguages.includes(lang as LanguageKeyType)}
-                  key={lang as LanguageKeyType}
-                  value={lang as LanguageKeyType}
+                  disabled={!currentlySupportedLanguages.includes(lang as LanguageType)}
+                  key={lang as LanguageType}
+                  value={lang as LanguageType}
                   onSelect={currentValue => {
                     setCodeObject({
                       ...codeObject,
-                      language: currentValue as LanguageKeyType,
-                      code: boilerplates[currentValue as LanguageKeyType],
+                      language: currentValue as LanguageType,
+                      code: boilerplates[currentValue as LanguageType],
                     });
                     setOpen(false);
                   }}
                 >
-                  {lang}
+                  {languageLabels[lang]}
                   <HiCheck
                     className={`ml-auto ${codeObject.language === lang ? "opacity-100" : "opacity-0"}`}
                   />
