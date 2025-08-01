@@ -1,9 +1,5 @@
 "use client";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { useTheme } from "@/context/ThemeProvider";
 import Editor from "@monaco-editor/react";
 import { useEffect, useState } from "react";
@@ -19,14 +15,8 @@ import { Textarea } from "@/components/ui/textarea";
 import ResetButton from "@/components/custom/ResetButton";
 
 const Page = () => {
-  const {
-    codeObject,
-    setCodeObject,
-    editorSettings,
-    setEditorSettings,
-    result,
-    setResult,
-  } = useCodeContext();
+  const { codeObject, setCodeObject, editorSettings, setEditorSettings, result, setResult } =
+    useCodeContext();
   const { theme } = useTheme();
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const [showTestcaseResult, setShowTestcaseResult] = useState(false);
@@ -42,12 +32,7 @@ const Page = () => {
         direction={isSmallScreen ? "vertical" : "horizontal"}
         className="w-full h-full grow gap-0.5"
       >
-        <ResizablePanel
-          id="editorPanel"
-          order={1}
-          defaultSize={70}
-          className="w-full h-full"
-        >
+        <ResizablePanel id="editorPanel" order={1} defaultSize={70} className="w-full h-full">
           <div className="w-full h-full flex flex-col gap-2 dark:bg-[#1e1e1e] p-2">
             <div className="w-full flex flex-wrap gap-2 sm:gap-4 justify-start items-center px-0 sm:px-1">
               <LanguageSelector />
@@ -64,9 +49,7 @@ const Page = () => {
                 height="100%"
                 theme={theme === "dark" ? "vs-dark" : "light"}
                 defaultValue=""
-                onChange={value =>
-                  setCodeObject({ ...codeObject, code: value || "" })
-                }
+                onChange={value => setCodeObject({ ...codeObject, code: value || "" })}
                 value={codeObject.code}
                 options={{
                   fontSize: editorSettings.fontSize,
@@ -76,18 +59,10 @@ const Page = () => {
             </div>
           </div>
         </ResizablePanel>
-        <ResizableHandle
-          id="editorSeparator"
-          className="bg-[#007cc4] dark:bg-neutral-400"
-        >
+        <ResizableHandle id="editorSeparator" className="bg-[#007cc4] dark:bg-neutral-400">
           <LuChevronsLeftRight />
         </ResizableHandle>
-        <ResizablePanel
-          id="panel2"
-          order={2}
-          defaultSize={30}
-          className="w-full h-full"
-        >
+        <ResizablePanel id="panel2" order={2} defaultSize={30} className="w-full h-full">
           <ResizablePanelGroup
             id="ioPanelGroup"
             direction={isSmallScreen ? "horizontal" : "vertical"}
@@ -101,9 +76,7 @@ const Page = () => {
             >
               <div className="h-full w-full flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-2 p-2">
-                  <h2 className="text-lg italic dark:text-neutral-300">
-                    Input
-                  </h2>
+                  <h2 className="text-lg italic dark:text-neutral-300">Input</h2>
                 </div>
                 <div className="text-sm overflow-auto grow">
                   <Textarea
@@ -120,10 +93,7 @@ const Page = () => {
                 </div>
               </div>
             </ResizablePanel>
-            <ResizableHandle
-              id="ioSeparator1"
-              className="bg-[#007cc4] dark:bg-neutral-400"
-            >
+            <ResizableHandle id="ioSeparator1" className="bg-[#007cc4] dark:bg-neutral-400">
               <LuChevronsLeftRight />
             </ResizableHandle>
             {!isSmallScreen && (
@@ -136,25 +106,20 @@ const Page = () => {
                 >
                   <div className="h-full w-full flex flex-col gap-2">
                     <div className="flex items-center justify-between p-2 gap-2">
-                      <h2 className="text-lg italic dark:text-neutral-300">
-                        Expected output
-                      </h2>
-                      {showTestcaseResult &&
-                        result?.output &&
-                        editorSettings.expectedOutput && (
-                          <div>
-                            {result.output.trim() ===
-                            editorSettings.expectedOutput.trim() ? (
-                              <div className="px-3 py-1 text-green-500 rounded-[6px] bg-green-500/20 text-sm">
-                                Passed
-                              </div>
-                            ) : (
-                              <div className="px-3 py-1 text-red-500 rounded-[6px] bg-red-500/20 text-sm">
-                                Failed
-                              </div>
-                            )}
-                          </div>
-                        )}
+                      <h2 className="text-lg italic dark:text-neutral-300">Expected output</h2>
+                      {showTestcaseResult && result?.output && editorSettings.expectedOutput && (
+                        <div>
+                          {result.output.trim() === editorSettings.expectedOutput.trim() ? (
+                            <div className="px-3 py-1 text-green-500 rounded-[6px] bg-green-500/20 text-sm">
+                              Passed
+                            </div>
+                          ) : (
+                            <div className="px-3 py-1 text-red-500 rounded-[6px] bg-red-500/20 text-sm">
+                              Failed
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div className="text-sm overflow-auto grow">
                       <Textarea
@@ -172,10 +137,7 @@ const Page = () => {
                     </div>
                   </div>
                 </ResizablePanel>
-                <ResizableHandle
-                  id="ioSeparator2"
-                  className="bg-[#007cc4] dark:bg-neutral-400"
-                >
+                <ResizableHandle id="ioSeparator2" className="bg-[#007cc4] dark:bg-neutral-400">
                   <LuChevronsLeftRight />
                 </ResizableHandle>
               </>
@@ -188,9 +150,7 @@ const Page = () => {
             >
               <div className="h-full w-full flex flex-col gap-4 p-2">
                 <div className="flex items-center justify-between gap-2">
-                  <h2 className="text-lg italic dark:text-neutral-300">
-                    Output
-                  </h2>
+                  <h2 className="text-lg italic dark:text-neutral-300">Output</h2>
                   <Button variant="outline" onClick={() => setResult(null)}>
                     Clear
                   </Button>
@@ -201,17 +161,12 @@ const Page = () => {
                       ?.trim()
                       ?.split("\n")
                       ?.map((line: string, index: number) => (
-                        <p
-                          key={index}
-                          className={`${result.error ? "text-red-500" : ""}`}
-                        >
+                        <p key={index} className={`${result.error ? "text-red-500" : ""}`}>
                           {line}
                         </p>
                       ))
                   ) : (
-                    <p className="text-neutral-400 dark:text-neutral-500">
-                      {`Nothing to show :(`}
-                    </p>
+                    <p className="text-neutral-400 dark:text-neutral-500">{`Nothing to show :(`}</p>
                   )}
                 </div>
                 {/* {result && (

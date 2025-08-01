@@ -23,11 +23,7 @@ const ThemeSwitch2: FC = () => {
         text-white
       "
     >
-      {theme === "dark" ? (
-        <FiSun className="text-2xl" />
-      ) : (
-        <FiMoon className="text-2xl" />
-      )}
+      {theme === "dark" ? <FiSun className="text-2xl" /> : <FiMoon className="text-2xl" />}
     </Button>
   );
 };

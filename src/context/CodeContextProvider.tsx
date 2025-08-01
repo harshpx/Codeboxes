@@ -1,14 +1,7 @@
 "use client";
 import { boilerplates } from "@/lib/utils";
 import { LanguageKeyType } from "@/lib/utils";
-import {
-  createContext,
-  FC,
-  PropsWithChildren,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, FC, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 export type CodeObjectType = {
   id: string;
@@ -70,8 +63,7 @@ const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
       const storedEditorSettings = localStorage.getItem("editorSettings");
 
       if (storedCodeObject) setCodeObject(JSON.parse(storedCodeObject));
-      if (storedEditorSettings)
-        setEditorSettings(JSON.parse(storedEditorSettings));
+      if (storedEditorSettings) setEditorSettings(JSON.parse(storedEditorSettings));
     } catch (error) {
       console.error("Error parsing localStorage data:", error);
     }

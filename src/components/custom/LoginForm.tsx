@@ -8,14 +8,7 @@ import { loginSchema } from "@/lib/validations";
 import { z } from "zod";
 import { loginUser } from "@/services/user";
 import { toast } from "sonner";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import ButtonWithLoader from "./ButtonWithLoader";
 
@@ -47,19 +40,16 @@ const LoginForm: FC = () => {
           description: "Welcome back!",
           duration: 2000,
         });
-        setResponseMessage(res?.message);
+        setResponseMessage("Login successful!");
         setResponseError(false);
       } else {
         throw new Error(res.response || "Login failed");
       }
     } catch (error) {
-      toast.error(
-        (error as Error).message || "An error occurred during login",
-        {
-          description: "Please try again.",
-          duration: 2000,
-        },
-      );
+      toast.error((error as Error).message || "An error occurred during login", {
+        description: "Please try again.",
+        duration: 2000,
+      });
       setResponseMessage((error as Error).message);
       setResponseError(true);
     } finally {
@@ -81,11 +71,7 @@ const LoginForm: FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel
-                  className={
-                    formController.formState.errors.identifier
-                      ? "text-red-600"
-                      : ""
-                  }
+                  className={formController.formState.errors.identifier ? "text-red-600" : ""}
                 >
                   Username or Email
                 </FormLabel>
@@ -111,11 +97,7 @@ const LoginForm: FC = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel
-                  className={
-                    formController.formState.errors.password
-                      ? "text-red-600"
-                      : ""
-                  }
+                  className={formController.formState.errors.password ? "text-red-600" : ""}
                 >
                   Password
                 </FormLabel>
@@ -138,9 +120,7 @@ const LoginForm: FC = () => {
         </div>
         {responseMessage && (
           <div
-            className={`text-center text-sm ${
-              responseError ? "text-red-600" : "text-green-600"
-            }`}
+            className={`text-center text-sm ${responseError ? "text-red-600" : "text-green-600"}`}
           >
             {responseMessage}
           </div>

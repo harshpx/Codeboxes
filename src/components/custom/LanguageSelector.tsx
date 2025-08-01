@@ -1,9 +1,4 @@
-import {
-  languages,
-  boilerplates,
-  currentlySupportedLanguages,
-  LanguageKeyType,
-} from "@/lib/utils";
+import { languages, boilerplates, currentlySupportedLanguages, LanguageKeyType } from "@/lib/utils";
 import { useState } from "react";
 import {
   Command,
@@ -13,11 +8,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { HiChevronUpDown } from "react-icons/hi2";
 import { HiCheck } from "react-icons/hi";
@@ -48,17 +39,11 @@ const LanguageSelector = () => {
         <Command>
           <CommandInput placeholder="Search ..." />
           <CommandList>
-            <CommandEmpty className="opacity-50 p-1 text-sm">
-              No language found.
-            </CommandEmpty>
+            <CommandEmpty className="opacity-50 p-1 text-sm">No language found.</CommandEmpty>
             <CommandGroup>
               {Object.keys(languages).map(lang => (
                 <CommandItem
-                  disabled={
-                    !currentlySupportedLanguages.includes(
-                      lang as LanguageKeyType,
-                    )
-                  }
+                  disabled={!currentlySupportedLanguages.includes(lang as LanguageKeyType)}
                   key={lang as LanguageKeyType}
                   value={lang as LanguageKeyType}
                   onSelect={currentValue => {

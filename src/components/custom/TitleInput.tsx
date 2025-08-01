@@ -10,9 +10,7 @@ const TitleInput = () => {
       style={{ fontSize: "18px" }}
       placeholder="Enter title here..."
       value={codeObject.title}
-      onChange={e =>
-        setCodeObject({ ...codeObject, title: e.target.value || "" })
-      }
+      onChange={e => setCodeObject({ ...codeObject, title: e.target.value || "" })}
     />
   );
 };

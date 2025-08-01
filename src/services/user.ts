@@ -1,10 +1,6 @@
 import { baseUrl } from "@/lib/utils";
 
-export const registerUser = async (
-  username: string,
-  email: string,
-  password: string,
-) => {
+export const registerUser = async (username: string, email: string, password: string) => {
   const url = `${baseUrl}/api/v1/users/register`;
   const options = {
     method: "POST",
@@ -35,4 +31,28 @@ export const loginUser = async (identifier: string, password: string) => {
   };
   const data = await fetch(url, options);
   return await data.json();
+};
+
+export const checkUsernameAvailability = async (username: string) => {
+  const url = `${baseUrl}/api/v1/users/check-availability?username=${encodeURIComponent(username)}`;
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const rawData = await fetch(url, options);
+  return await rawData.json();
+};
+
+export const checkEmailAvailability = async (email: string) => {
+  const url = `${baseUrl}/api/v1/users/check-availability?email=${encodeURIComponent(email)}`;
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const rawData = await fetch(url, options);
+  return await rawData.json();
 };

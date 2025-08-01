@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 /* eslint-disable @typescript-eslint/no-unused-vars, no-unused-vars */
 export const ThemeContext = createContext({
@@ -22,9 +16,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     if (storedTheme && (storedTheme === "light" || storedTheme === "dark")) {
       setTheme(storedTheme as "light" | "dark");
     } else {
-      const userPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
+      const userPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       const initialTheme = userPrefersDark ? "dark" : "light";
       setTheme(initialTheme);
     }
@@ -37,11 +29,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     document.documentElement.classList.add(theme);
   };
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
 };
 
 export default ThemeProvider;

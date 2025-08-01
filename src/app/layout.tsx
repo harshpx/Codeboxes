@@ -26,9 +26,7 @@ export default function RootLayout({
       <ThemeProvider>
         <AuthContextProvider>
           <CodeContextProvider>
-            <body
-              className={`antialiased transition-all duration-400 ease-in-out`}
-            >
+            <body className={`antialiased transition-all duration-400 ease-in-out`}>
               <div className="min-h-screen min-w-full flex flex-col bg-white dark:bg-[#1e1e1e]">
                 {children}
                 <Toaster />

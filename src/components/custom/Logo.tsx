@@ -12,19 +12,13 @@ export type LogoComponentProps = {
   fixColorWhite?: boolean;
 };
 
-const Logo: FC<LogoComponentProps> = ({
-  size,
-  style,
-  fixColorWhite = false,
-}) => {
+const Logo: FC<LogoComponentProps> = ({ size, style, fixColorWhite = false }) => {
   const isMobile = useMediaQuery("(max-width: 640px)");
 
   return (
     <div
       className={`flex items-center justify-center gap-2
-         ${style === "inline" ? "flex-row" : ""} ${
-           style === "block" ? "flex-col" : ""
-         }`}
+         ${style === "inline" ? "flex-row" : ""} ${style === "block" ? "flex-col" : ""}`}
     >
       <LuBoxes
         size={size === "sm" ? 24 : size === "md" ? 30 : 40}

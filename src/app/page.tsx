@@ -41,9 +41,7 @@ const Home = () => {
         </div>
         <div className="flex items-center gap-4">
           {/* add buttons here */}
-          <StyledButton onClick={() => router.push("/auth")}>
-            Login/Register
-          </StyledButton>
+          <StyledButton onClick={() => router.push("/auth")}>Login/Register</StyledButton>
           <StyledButton onClick={() => router.push("/editor")}>
             Try out now <ArrowRight />
           </StyledButton>

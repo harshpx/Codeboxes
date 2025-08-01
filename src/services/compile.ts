@@ -1,10 +1,6 @@
 import { baseUrl } from "@/lib/utils";
 
-export const compile = async (
-  code: string,
-  language: string,
-  input: string,
-) => {
+export const compile = async (code: string, language: string, input: string) => {
   const url: string = `${baseUrl}/api/v1/execute`;
   const options = {
     method: "POST",
@@ -22,8 +18,6 @@ export const compile = async (
   if (response.ok) {
     return data;
   } else {
-    throw new Error(
-      data.message || "An error occurred while compiling the code",
-    );
+    throw new Error(data.message || "An error occurred while compiling the code");
   }
 };

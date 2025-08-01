@@ -18,11 +18,7 @@ const ButtonWithLoader: FC<ButtonWithLoaderProps> = ({
 }) => {
   return (
     <Button type={type} className={className}>
-      {loading ? (
-        <Loader2 className="w-4 aspect-square animate-spin text-md" />
-      ) : (
-        children
-      )}
+      {loading ? <Loader2 className="w-4 aspect-square animate-spin text-md" /> : children}
     </Button>
   );
 };

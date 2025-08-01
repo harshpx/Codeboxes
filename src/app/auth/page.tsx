@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import ThemeSwitch3 from "@/components/custom/ThemeSwitch3";
 import LoginForm from "@/components/custom/LoginForm";
 import SignupForm from "@/components/custom/SignupForm";
+import { useAuthContext } from "@/context/AuthContextProvider";
+import { useRouter } from "next/navigation";
 
 const tabs = [
   {
@@ -49,17 +51,25 @@ const tabs = [
 const AuthPage: FC = () => {
   // const isMobile = useMediaQuery("(max-width: 640px)");
   // const isSmallScreen = useMediaQuery("(max-width: 450px)");
+  const { isAuthorized } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthorized) {
+      router.push("/dashboard");
+    }
+  }, [isAuthorized]);
+
   const isLargeScreen = useMediaQuery("(min-width: 1200px)");
   const [activePage, setActivePage] = useState("login");
+
   return (
     <div className="relative grow w-full flex flex-col items-center justify-center transition-all duration-400 ease-in">
       <div
         className={`absolute top-0 left-0 px-4 py-4 w-full flex items-center justify-between ${activePage === "signup" && isLargeScreen ? "" : "flex-row-reverse"}`}
       >
         {isLargeScreen ? <ThemeSwitch2 /> : <ThemeSwitch3 />}
-        {!isLargeScreen && (
-          <Logo size="sm" style="inline" fixColorWhite={true} />
-        )}
+        {!isLargeScreen && <Logo size="sm" style="inline" fixColorWhite={true} />}
       </div>
       <div
         className={`grow flex justify-center items-stretch w-full p-4 py-5 transition-all duration-400 ease-in ${!isLargeScreen ? "bg-gradient-to-l from-[#007cc4] to-purple-500" : ""}`}
@@ -88,9 +98,7 @@ const AuthPage: FC = () => {
           {!isLargeScreen && (
             <div className="flex flex-col gap-2 items-center justify-center">
               <p className="text-2xl font-[200]">
-                {activePage === "login"
-                  ? "Welcome back to"
-                  : "Get started with"}
+                {activePage === "login" ? "Welcome back to" : "Get started with"}
               </p>
 
               <div className="text-3xl font-semibold">Codeboxes</div>
@@ -112,11 +120,7 @@ const AuthPage: FC = () => {
             )}
             {tabs.map((tab, key) => (
               <TabsContent key={key} value={tab?.value} className="w-full">
-                <motion.div
-                  initial={tab.initial}
-                  animate={tab.animate}
-                  transition={tab.transition}
-                >
+                <motion.div initial={tab.initial} animate={tab.animate} transition={tab.transition}>
                   <Card className="border-none bg-transparent shadow-none">
                     <CardHeader className="text-center">
                       <CardTitle className="text-xl">{tab?.label}</CardTitle>
@@ -130,11 +134,7 @@ const AuthPage: FC = () => {
                         <div>{tab?.footer?.text}</div>
                         <div
                           className="text-[#27a6ff] cursor-pointer hover:underline"
-                          onClick={() =>
-                            setActivePage(
-                              tab?.value === "login" ? "signup" : "login",
-                            )
-                          }
+                          onClick={() => setActivePage(tab?.value === "login" ? "signup" : "login")}
                         >
                           {tab?.footer?.link}
                         </div>

@@ -5,8 +5,7 @@ export const usernameValidation = z
   .min(3, { message: "Username should be longer than 2 characters" })
   .max(10, { message: "Username should be shorter than 11 characters" })
   .regex(/^[a-zA-Z0-9_.]*$/, {
-    message:
-      "Username should contain only letters, numbers, underscores and dots",
+    message: "Username should contain only letters, numbers, underscores and dots",
   });
 
 export const emailValidation = z.email();
