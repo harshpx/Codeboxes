@@ -36,7 +36,11 @@ const RunCode = () => {
       <Button
         onClick={runCode}
         variant="outline"
-        className="flex items-center gap-2 border-2 border-cyan-500 dark:border-cyan-500"
+        className="
+          flex items-center gap-2 border-2 border-cyan-500 dark:border-cyan-500 
+          hover:bg-cyan-500
+          dark:hover:bg-cyan-500
+          hover:text-white"
       >
         Run
         <IoPlay />

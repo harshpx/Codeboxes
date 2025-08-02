@@ -12,3 +12,16 @@ export const getCodes = async (token: string) => {
   const res = await fetch(url, options);
   return await res.json();
 };
+
+export const getCodeById = async (id: string, token: string) => {
+  const url = `${baseUrl}/api/v1/codes/${id}`;
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const res = await fetch(url, options);
+  return await res.json();
+};

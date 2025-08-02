@@ -6,7 +6,11 @@ const TitleInput = () => {
   const { codeObject, setCodeObject } = useCodeContext();
   return (
     <Input
-      className="text-center shadow-none placeholder:text-neutral-300 placeholder:text-center border-0 focus-visible:border-2 focus-visible:border-neutral-100 hover:border hover:border-neutral-300"
+      className="
+        bg-transparent shadow-none text-center text-white
+        placeholder:text-neutral-300 placeholder:text-center 
+        border-0 focus-visible:border-2 focus-visible:border-neutral-100 
+        hover:border hover:border-neutral-300"
       style={{ fontSize: "18px" }}
       placeholder="Enter title here..."
       value={codeObject.title}
