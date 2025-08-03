@@ -11,11 +11,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Loader2 } from "lucide-react";
 import ButtonWithLoader from "./ButtonWithLoader";
+import { useStateContext } from "@/context/StateContextProvider";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
 const SignupForm: FC = () => {
-  const { setUser, loading, setLoading } = useAuthContext();
+  const { setUser } = useAuthContext();
+  const { loading, setLoading } = useStateContext();
 
   const [inputUsername, setInputUsername] = useState("");
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);
@@ -138,12 +140,12 @@ const SignupForm: FC = () => {
         onSubmit={formController.handleSubmit(onSubmit)}
         className="text-left flex flex-col gap-2 items-center"
       >
-        <div className="w-full flex flex-col gap-3 sm:grid sm:grid-cols-2 items-start">
+        <div className="gap-3 grid grid-cols-1 sm:grid-cols-2 items-start">
           <FormField
             control={formController.control}
             name="username"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-[200px]">
                 <FormLabel
                   className={formController.formState.errors.username ? "text-red-600" : ""}
                 >
@@ -153,6 +155,7 @@ const SignupForm: FC = () => {
                   <Input
                     type="text"
                     placeholder="Username"
+                    className="border-neutral-400 dark:border-neutral-600"
                     value={field.value}
                     onChange={e => {
                       field.onChange(e);
@@ -168,10 +171,10 @@ const SignupForm: FC = () => {
                 {isCheckingUsername && <Loader2 className="w-4 aspect-square animate-spin" />}
 
                 {formController.formState.errors.username ? (
-                  <FormMessage className="text-red-600" />
+                  <FormMessage className="text-[12px] text-red-600" />
                 ) : !isCheckingUsername && usernameMessage ? (
                   <p
-                    className={`text-[0.8rem] font-[500] ${
+                    className={`text-[12px] ${
                       usernameMessage.toLowerCase().includes("not")
                         ? "text-red-600"
                         : "text-green-600"
@@ -187,7 +190,7 @@ const SignupForm: FC = () => {
             control={formController.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-[200px]">
                 <FormLabel className={formController.formState.errors.email ? "text-red-600" : ""}>
                   Email
                 </FormLabel>
@@ -195,6 +198,7 @@ const SignupForm: FC = () => {
                   <Input
                     type="text"
                     placeholder="Email"
+                    className="border-neutral-400 dark:border-neutral-600"
                     value={field.value}
                     onChange={e => {
                       field.onChange(e);
@@ -209,10 +213,10 @@ const SignupForm: FC = () => {
                 </FormControl>
                 {isCheckingEmail && <Loader2 className="w-4 aspect-square animate-spin" />}
                 {formController.formState.errors.email ? (
-                  <FormMessage className="text-red-600" />
+                  <FormMessage className="text-red-600 text-[12px]" />
                 ) : !isCheckingEmail && emailMessage ? (
                   <p
-                    className={`text-[0.8rem] font-[500] ${
+                    className={`text-[12px] ${
                       emailMessage.toLowerCase().includes("not") ? "text-red-600" : "text-green-600"
                     }`}
                   >
@@ -226,16 +230,21 @@ const SignupForm: FC = () => {
             control={formController.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-[200px]">
                 <FormLabel
                   className={formController.formState.errors.password ? "text-red-600" : ""}
                 >
                   Password
                 </FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    className="border-neutral-400 dark:border-neutral-600"
+                    {...field}
+                  />
                 </FormControl>
-                <FormMessage className="text-red-600" />
+                <FormMessage className="text-red-600 text-[12px]" />
               </FormItem>
             )}
           />
@@ -243,14 +252,19 @@ const SignupForm: FC = () => {
             control={formController.control}
             name="confirmPassword"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-[200px]">
                 <FormLabel
                   className={formController.formState.errors.confirmPassword ? "text-red-600" : ""}
                 >
                   Confirm Password
                 </FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Confirm Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="Confirm Password"
+                    className="border-neutral-400 dark:border-neutral-600"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage className="text-red-600" />
               </FormItem>

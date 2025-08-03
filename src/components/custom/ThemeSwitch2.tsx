@@ -15,11 +15,9 @@ const ThemeSwitch2: FC = () => {
     <Button
       onClick={toggleTheme}
       className="
-        rounded-full p-2 cursor-pointer box-border
-        bg-gradient-to-r from-sky-400 to-purple-400
+        rounded-3xl p-2 cursor-pointer box-border
+        bg-gradient-to-r from-sky-500 to-purple-500
         hover:bg-gradient-to-r hover:from-purple-500 hover:to-sky-500
-        dark:bg-gradient-to-r dark:from-sky-500 dark:to-purple-500
-        dark:hover:bg-gradient-to-r dark:hover:from-purple-500 dark:hover:to-sky-500
         text-white
       "
     >

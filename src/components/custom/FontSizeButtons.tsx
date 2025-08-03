@@ -1,6 +1,6 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { Button } from "@/components/ui/button";
-import { FaPlus, FaMinus } from "react-icons/fa6";
+import { LuAArrowDown, LuAArrowUp } from "react-icons/lu";
 
 const FontSizeButtons = () => {
   const { editorSettings, setEditorSettings } = useCodeContext();
@@ -25,11 +25,17 @@ const FontSizeButtons = () => {
     <div className="flex">
       <Button
         variant="outline"
-        className="rounded-r-none border-r-0"
+        className="rounded-r-none"
         onClick={decreaseFontSize}
         disabled={editorSettings.fontSize <= 14}
       >
-        <FaMinus />
+        <LuAArrowDown />
+      </Button>
+      <Button
+        variant="outline"
+        className="rounded-none border-l-0 border-r-0 cursor-default text-center w-4"
+      >
+        {editorSettings.fontSize}
       </Button>
       <Button
         variant="outline"
@@ -37,7 +43,7 @@ const FontSizeButtons = () => {
         onClick={increaseFontSize}
         disabled={editorSettings.fontSize >= 24}
       >
-        <FaPlus />
+        <LuAArrowUp />
       </Button>
     </div>
   );

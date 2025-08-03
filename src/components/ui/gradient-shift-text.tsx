@@ -18,7 +18,7 @@ const GradientTextShift: FC<GradientShiftTextProps> = ({
 }) => {
   return (
     <motion.span
-      className={`bg-gradient-to-r from-purple-500 via-emerald-500 to-cyan-400 bg-clip-text text-transparent ${containerClassName}`}
+      className={`bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent ${containerClassName}`}
       animate={{
         backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
       }}

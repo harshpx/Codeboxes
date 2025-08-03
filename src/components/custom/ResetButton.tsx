@@ -3,11 +3,13 @@ import { boilerplates } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { RiResetLeftFill } from "react-icons/ri";
 import { useAuthContext } from "@/context/AuthContextProvider";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const ResetButton = () => {
-  const { codeObject, setCodeObject, editorSettings, setEditorSettings, setResult } =
+  const { codeObject, setCodeObject, codeList, editorSettings, setEditorSettings, setResult } =
     useCodeContext();
-  const { isAuthorized, codeList } = useAuthContext();
+  const { isAuthorized } = useAuthContext();
+  const isSmallScreen = useMediaQuery("(max-width: 640px)");
 
   const handleReset = () => {
     if (!isAuthorized || codeObject.id === "" || !codeList || codeList.length === 0) {
@@ -40,6 +42,7 @@ const ResetButton = () => {
   return (
     <Button variant="outline" onClick={handleReset}>
       <RiResetLeftFill />
+      {!isSmallScreen && <p>Reset</p>}
     </Button>
   );
 };

@@ -18,6 +18,7 @@ import LoginForm from "@/components/custom/LoginForm";
 import SignupForm from "@/components/custom/SignupForm";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 const tabs = [
   {
@@ -60,7 +61,7 @@ const AuthPage: FC = () => {
     }
   }, [isAuthorized]);
 
-  const isLargeScreen = useMediaQuery("(min-width: 1200px)");
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const [activePage, setActivePage] = useState("login");
 
   return (
@@ -76,12 +77,12 @@ const AuthPage: FC = () => {
       >
         {isLargeScreen && (
           <div
-            className={`z-20 relative w-full bg-gradient-to-b from-[#007cc4] to-purple-500 rounded-2xl flex flex-col items-center justify-center gap-4 transition-transform duration-500 ease-in-out ${activePage === "signup" && isLargeScreen ? "translate-x-full" : "translate-x-0"}`}
+            className={`z-20 relative w-1/2 bg-gradient-to-b from-[#007cc4] to-purple-500 rounded-2xl flex flex-col items-center justify-center gap-4 transition-transform duration-500 ease-in-out ${activePage === "signup" && isLargeScreen ? "translate-x-full" : "translate-x-0"}`}
           >
             <div className="absolute top-4 left-4">
               <Logo size="sm" style="inline" fixColorWhite={true} />
             </div>
-            <p className="text-5xl text-white font-[200]">
+            <p className="text-5xl text-white text-center font-[200]">
               {activePage === "login" ? "Welcome back to" : "Get started with"}
             </p>
             <div className="text-5xl text-white font-semibold">Codeboxes</div>
@@ -90,10 +91,30 @@ const AuthPage: FC = () => {
                 ? "Login to save your code securely!"
                 : "Sign up with us & explore a new way of running and saving code snippets!"}
             </p>
+            <div className="absolute bottom-10 w-full flex items-center justify-center gap-2 text-[14px] text-white">
+              <p>
+                {activePage === "login" ? "Don't have an account?" : "Have an account already?"}
+              </p>
+              <Button
+                onClick={() => {
+                  setActivePage(activePage === "login" ? "signup" : "login");
+                }}
+                className="bg-transparent text-white border-1 border-white dark:border-white hover:bg-white/20"
+              >
+                {activePage === "login" ? "Signup" : "Login"}
+              </Button>
+              <p>{activePage === "login" ? "to get started!" : "and continue!"}</p>
+            </div>
           </div>
         )}
         <div
-          className={`${isLargeScreen ? "w-full" : "w-full sm:w-[600px]"} self-center flex flex-col items-center justify-center transition-transform duration-500 py-4 rounded-xl bg-white dark:bg-[#1e1e1e] shadow-2xl ease-in-out ${activePage === "signup" && isLargeScreen ? "-translate-x-full" : "translate-x-0"}`}
+          className={`
+            ${isLargeScreen ? "w-1/2" : "w-full sm:w-[600px]"} self-center 
+            flex flex-col items-center justify-center py-4 rounded-xl
+            transition-transform duration-500 ease-in-out 
+            ${isLargeScreen ? "bg-none" : "bg-white dark:bg-[#1e1e1e]"}
+            ${activePage === "signup" && isLargeScreen ? "-translate-x-full" : "translate-x-0"}
+          `}
         >
           {!isLargeScreen && (
             <div className="flex flex-col gap-2 items-center justify-center">
@@ -129,7 +150,7 @@ const AuthPage: FC = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>{tab?.content}</CardContent>
-                    <CardFooter>
+                    <CardFooter className="justify-center">
                       <div className="flex gap-1 text-[14px]">
                         <div>{tab?.footer?.text}</div>
                         <div

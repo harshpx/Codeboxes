@@ -54,3 +54,16 @@ export const updateCode = async (data: CodeObjectType, token: string) => {
   const res = await fetch(url, options);
   return await res.json();
 };
+
+export const deleteCode = async (id: string, token: string) => {
+  const url = `${baseUrl}/api/v1/codes/${id}`;
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const res = await fetch(url, options);
+  return await res.json();
+};

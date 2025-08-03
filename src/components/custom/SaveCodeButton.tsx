@@ -8,12 +8,15 @@ import { toast } from "sonner";
 import Loader from "./Loader";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { useStateContext } from "@/context/StateContextProvider";
 
 const SaveCodeButton: FC = () => {
-  const { isAuthorized, user, codeList, setCodeList, logout, loading, setLoading } =
-    useAuthContext();
-  const { codeObject } = useCodeContext();
+  const { isAuthorized, user, logout } = useAuthContext();
+  const { loading, setLoading } = useStateContext();
+  const { codeObject, codeList, setCodeList } = useCodeContext();
   const router = useRouter();
+  const isSmallScreen = useMediaQuery("(max-width: 640px)");
 
   const handleSave = async () => {
     if (!isAuthorized) return;
@@ -100,6 +103,7 @@ const SaveCodeButton: FC = () => {
       {loading && <Loader />}
       <Button onClick={handleSave} variant="outline">
         <IoSave />
+        {!isSmallScreen && <p>Save</p>}
       </Button>
     </>
   );

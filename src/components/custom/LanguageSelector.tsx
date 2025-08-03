@@ -31,7 +31,7 @@ const LanguageSelector = () => {
           role="combobox"
           aria-expanded={open}
           size={"sm"}
-          className="w-[150px] justify-between"
+          className="w-[120px] h-9 justify-between"
         >
           {languageLabels[codeObject.language]}
           <HiChevronUpDown className="shrink-0" />

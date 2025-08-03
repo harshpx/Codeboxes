@@ -3,18 +3,20 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
 import { currentlySupportedLanguages } from "@/lib/utils";
-import StyledButton from "@/components/custom/StyledButton";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import ThemeSwitch2 from "@/components/custom/ThemeSwitch2";
-import Logo from "@/components/custom/Logo";
 import { useAuthContext } from "@/context/AuthContextProvider";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import Loader from "@/components/custom/Loader";
+import { useStateContext } from "@/context/StateContextProvider";
+import LogoColored from "@/components/custom/LogoColored";
+import StyledButton from "@/components/custom/StyledButton";
 
-const Home = () => {
+const Home: FC = () => {
   const router = useRouter();
-  const { isAuthorized, loading } = useAuthContext();
+  const { isAuthorized } = useAuthContext();
+  const { loading } = useStateContext();
 
   useEffect(() => {
     if (isAuthorized) {
@@ -30,7 +32,7 @@ const Home = () => {
         className="grow relative flex flex-col justify-center items-center"
       >
         <div className="absolute top-2 left-0 w-full justify-self-start h-[48px] px-4 py-2 gap-2 flex items-center justify-between bg-transparent">
-          <Logo size="sm" style="inline" />
+          <LogoColored size="sm" style="inline" />
           <div className="z-10 transition-all duration-400 ease-in-out">
             <ThemeSwitch2 />
           </div>
@@ -47,12 +49,22 @@ const Home = () => {
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <div className="text-xl sm:text-2xl">instantly with </div>
-            <GradientTextShift>Codeboxes</GradientTextShift>
+            <GradientTextShift duration={2}>Codeboxes</GradientTextShift>
           </div>
           <div className="flex items-center gap-4">
             {/* add buttons here */}
-            <StyledButton onClick={() => router.push("/auth")}>Login/Register</StyledButton>
-            <StyledButton onClick={() => router.push("/editor")}>
+            <StyledButton
+              outerClassName="h-10 rounded-3xl"
+              innerClassName="rounded-3xl"
+              onClick={() => router.push("/auth")}
+            >
+              Login/Register
+            </StyledButton>
+            <StyledButton
+              outerClassName="h-10 rounded-3xl"
+              innerClassName="rounded-3xl"
+              onClick={() => router.push("/editor")}
+            >
               Try out now <ArrowRight />
             </StyledButton>
           </div>

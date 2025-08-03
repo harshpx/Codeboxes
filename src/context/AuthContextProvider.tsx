@@ -1,10 +1,11 @@
 "use client";
 import { createContext, FC, PropsWithChildren, useContext, useEffect, useState } from "react";
 import { setCookie, getCookie, removeCookie } from "typescript-cookie";
-import { CodeObjectType } from "./CodeContextProvider";
+import { CodeObjectType, useCodeContext } from "./CodeContextProvider";
 import { getUserDetails } from "@/services/user";
 import { toast } from "sonner";
 import { getCodes } from "@/services/code";
+import { useStateContext } from "./StateContextProvider";
 
 export type UserType = {
   id: string;
@@ -18,23 +19,20 @@ export type UserType = {
 export const AuthContext = createContext({
   user: null as UserType | null,
   setUser: (user: UserType | null) => {},
-  codeList: null as CodeObjectType[] | null,
-  setCodeList: (codeList: CodeObjectType[] | null) => {},
   logout: () => {},
   isAuthorized: false,
-  loading: false,
-  setLoading: (loading: boolean) => {},
 });
 
 const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [user, setUser] = useState<UserType | null>(null);
-  const [codeList, setCodeList] = useState<CodeObjectType[] | null>(null);
-  const [loading, setLoading] = useState(false);
+  const { setLoading } = useStateContext();
+  const { codeObject, setCodeObject, setCodeList } = useCodeContext();
 
   const logout = () => {
     removeCookie("user");
     setUser(null);
     setCodeList(null);
+    setCodeObject({ ...codeObject, id: "", title: "" });
   };
 
   useEffect(() => {
@@ -75,7 +73,10 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
           setLoading(true);
           const getCodesResponse = await getCodes(user?.token || "");
           if (getCodesResponse.success) {
-            setCodeList(getCodesResponse.response);
+            const fetchedCodes: CodeObjectType[] = getCodesResponse.response?.map(
+              ({ createdBy, ...rest }: CodeObjectType) => rest,
+            );
+            setCodeList(fetchedCodes);
           } else if (getCodesResponse.status === 401) {
             toast.error("Session expired, please login again.", {
               duration: 2000,
@@ -102,9 +103,7 @@ const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const isAuthorized = !!user && !!user.token;
 
   return (
-    <AuthContext.Provider
-      value={{ user, setUser, codeList, setCodeList, logout, isAuthorized, loading, setLoading }}
-    >
+    <AuthContext.Provider value={{ user, setUser, logout, isAuthorized }}>
       {children}
     </AuthContext.Provider>
   );

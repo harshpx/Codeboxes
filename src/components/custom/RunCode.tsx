@@ -4,11 +4,11 @@ import { IoPlay } from "react-icons/io5";
 import Loader from "@/components/custom/Loader";
 import { compile } from "@/services/compile";
 import { toast } from "sonner";
-import { useAuthContext } from "@/context/AuthContextProvider";
+import { useStateContext } from "@/context/StateContextProvider";
 
 const RunCode = () => {
   const { codeObject, setResult } = useCodeContext();
-  const { loading, setLoading } = useAuthContext();
+  const { loading, setLoading } = useStateContext();
 
   const runCode = async () => {
     try {
@@ -35,18 +35,25 @@ const RunCode = () => {
   };
   return (
     <>
-      <Button
-        onClick={runCode}
-        variant="outline"
+      <div
         className="
-          flex items-center gap-2 border-2 border-cyan-500 dark:border-cyan-500 
-          hover:bg-cyan-500
-          dark:hover:bg-cyan-500
-          hover:text-white"
+          p-[1px] h-9 rounded-md box-border overflow-hidden 
+          flex items-center justify-center
+          bg-gradient-to-r from-cyan-500 to-purple-500
+        "
       >
-        Run
-        <IoPlay />
-      </Button>
+        <Button
+          onClick={runCode}
+          className="
+            p-0 h-full border-0 bg-white dark:bg-[#1e1e1e]
+            text-black dark:text-white
+            hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-purple-500
+          "
+        >
+          Run
+          <IoPlay />
+        </Button>
+      </div>
       {loading && <Loader />}
     </>
   );

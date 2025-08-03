@@ -37,7 +37,7 @@ export const languageLabels: Record<LanguageType, string> = {
   dart: "Dart",
   kt: "Kotlin",
   swift: "Swift",
-  go: "Golang",
+  go: "Go",
   scala: "Scala",
   sh: "Bash",
   rs: "Rust",
@@ -189,6 +189,6 @@ puts "Hello, Ruby!"
 `,
 };
 
-export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js", "go"];
+export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js"];
 
 export const baseUrl = "https://codeboxes.152.42.158.94.nip.io";

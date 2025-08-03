@@ -10,11 +10,13 @@ import { toast } from "sonner";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import ButtonWithLoader from "./ButtonWithLoader";
+import { useStateContext } from "@/context/StateContextProvider";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginForm: FC = () => {
-  const { setUser, loading, setLoading } = useAuthContext();
+  const { setUser } = useAuthContext();
+  const { loading, setLoading } = useStateContext();
   const [responseMessage, setResponseMessage] = useState("");
   const [responseError, setResponseError] = useState(false);
 
@@ -57,7 +59,6 @@ const LoginForm: FC = () => {
 
   return (
     <Form {...formController}>
-      {/* {loading && <Loader />} */}
       <form
         onSubmit={formController.handleSubmit(onSubmit)}
         className="text-left flex flex-col gap-2 items-center"
@@ -67,7 +68,7 @@ const LoginForm: FC = () => {
             control={formController.control}
             name="identifier"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-[200px]">
                 <FormLabel
                   className={formController.formState.errors.identifier ? "text-red-600" : ""}
                 >
@@ -77,6 +78,7 @@ const LoginForm: FC = () => {
                   <Input
                     type="text"
                     placeholder="Enter your username or email"
+                    className="border-neutral-400 dark:border-neutral-600"
                     value={field.value}
                     onChange={e => {
                       field.onChange(e.target.value);
@@ -85,7 +87,7 @@ const LoginForm: FC = () => {
                     }}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600" />
+                <FormMessage className="text-[12px] text-red-600" />
               </FormItem>
             )}
           />
@@ -93,7 +95,7 @@ const LoginForm: FC = () => {
             control={formController.control}
             name="password"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="w-[200px]">
                 <FormLabel
                   className={formController.formState.errors.password ? "text-red-600" : ""}
                 >
@@ -103,7 +105,9 @@ const LoginForm: FC = () => {
                   <Input
                     type="password"
                     placeholder="Password"
+                    className="border-neutral-400 dark:border-neutral-600"
                     value={field.value}
+                    width={400}
                     onChange={e => {
                       field.onChange(e.target.value);
                       setResponseMessage("");
@@ -111,7 +115,7 @@ const LoginForm: FC = () => {
                     }}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600" />
+                <FormMessage className="text-[12px] text-red-600" />
               </FormItem>
             )}
           />

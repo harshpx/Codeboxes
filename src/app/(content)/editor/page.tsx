@@ -10,20 +10,24 @@ import { useCodeContext } from "@/context/CodeContextProvider";
 import RunCode from "@/components/custom/RunCode";
 import { Button } from "@/components/ui/button";
 import FontSizeButtons from "@/components/custom/FontSizeButtons";
-import { LuChevronsLeftRight } from "react-icons/lu";
 import { Textarea } from "@/components/ui/textarea";
 import ResetButton from "@/components/custom/ResetButton";
 import SaveCodeButton from "@/components/custom/SaveCodeButton";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import Loader from "@/components/custom/Loader";
+import DeleteCodeButton from "@/components/custom/DeleteCodeButton";
+import NewCodeButton from "@/components/custom/NewCodeButton";
+import { useStateContext } from "@/context/StateContextProvider";
 
 const Page = () => {
   const { codeObject, setCodeObject, editorSettings, setEditorSettings, result, setResult } =
     useCodeContext();
   const { theme } = useTheme();
-  const { isAuthorized, loading } = useAuthContext();
-  const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const { isAuthorized } = useAuthContext();
+  const { loading } = useStateContext();
+
   const [showTestcaseResult, setShowTestcaseResult] = useState(false);
+  const isSmallScreen = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
     setShowTestcaseResult(true);
@@ -38,15 +42,28 @@ const Page = () => {
           direction={isSmallScreen ? "vertical" : "horizontal"}
           className="w-full h-full grow gap-0.5"
         >
-          <ResizablePanel id="editorPanel" order={1} defaultSize={70} className="w-full h-full">
+          <ResizablePanel
+            id="editorPanel"
+            order={1}
+            defaultSize={70}
+            minSize={70}
+            className="w-full h-full"
+          >
             <div className="w-full h-full flex flex-col gap-2 dark:bg-[#1e1e1e] p-2">
-              <div className="w-full flex flex-wrap gap-2 sm:gap-4 justify-start items-center px-0 sm:px-1">
-                <LanguageSelector />
-                <FontSizeButtons />
-                <ResetButton />
-                {isAuthorized && <SaveCodeButton />}
-                {/* <DeleteCodeButton /> */}
-                <RunCode />
+              <div
+                className={`w-full flex flex-wrap gap-1 justify-center lg:justify-between items-center px-0 sm:px-1`}
+              >
+                <div className="flex items-center gap-1">
+                  <LanguageSelector />
+                  <FontSizeButtons />
+                </div>
+                <div className="flex items-center gap-1">
+                  {isAuthorized && codeObject.id !== "" && <NewCodeButton />}
+                  <ResetButton />
+                  {isAuthorized && <SaveCodeButton />}
+                  {isAuthorized && codeObject.id !== "" && <DeleteCodeButton />}
+                  <RunCode />
+                </div>
               </div>
               <div className="relative grow">
                 <Editor
@@ -65,10 +82,20 @@ const Page = () => {
               </div>
             </div>
           </ResizablePanel>
-          <ResizableHandle id="editorSeparator" className="bg-[#007cc4] dark:bg-neutral-400">
-            <LuChevronsLeftRight />
-          </ResizableHandle>
-          <ResizablePanel id="panel2" order={2} defaultSize={30} className="w-full h-full">
+          <ResizableHandle
+            withHandle
+            className={`
+              ${isSmallScreen ? "bg-gradient-to-r" : "bg-gradient-to-b"} 
+              from-cyan-500 via-purple-500 to-cyan-500
+            `}
+          />
+          <ResizablePanel
+            id="panel2"
+            order={2}
+            defaultSize={30}
+            minSize={20}
+            className="w-full h-full"
+          >
             <ResizablePanelGroup
               id="ioPanelGroup"
               direction={isSmallScreen ? "horizontal" : "vertical"}
@@ -99,9 +126,7 @@ const Page = () => {
                   </div>
                 </div>
               </ResizablePanel>
-              <ResizableHandle id="ioSeparator1" className="bg-[#007cc4] dark:bg-neutral-400">
-                <LuChevronsLeftRight />
-              </ResizableHandle>
+              <ResizableHandle withHandle />
               {!isSmallScreen && (
                 <>
                   <ResizablePanel
@@ -143,9 +168,7 @@ const Page = () => {
                       </div>
                     </div>
                   </ResizablePanel>
-                  <ResizableHandle id="ioSeparator2" className="bg-[#007cc4] dark:bg-neutral-400">
-                    <LuChevronsLeftRight />
-                  </ResizableHandle>
+                  <ResizableHandle withHandle />
                 </>
               )}
               <ResizablePanel

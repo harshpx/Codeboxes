@@ -1,21 +1,40 @@
-"use client";
 import { FC, ReactNode } from "react";
+import { Button } from "../ui/button";
 
 type StyledButtonProps = {
   children: ReactNode;
   onClick?: () => void;
+  innerClassName?: string;
+  outerClassName?: string;
 };
 
-const StyledButton: FC<StyledButtonProps> = ({ children, onClick }) => {
+const StyledButton: FC<StyledButtonProps> = ({
+  children,
+  onClick,
+  innerClassName = "",
+  outerClassName = "",
+}) => {
   return (
-    <button
-      onClick={onClick}
-      className="z-10 cursor-pointer p-[2px] rounded-4xl hover:text-white bg-gradient-to-r from-cyan-600 to-cyan-400"
+    <div
+      className={`
+        z-10 px-[1px] py-[1px] h-9 rounded-3xl box-border overflow-hidden
+        flex items-center justify-center
+        bg-gradient-to-r from-cyan-500 to-purple-500
+        transition-all duration-300 ease-in-out ${outerClassName}
+      `}
     >
-      <div className="bg-white dark:bg-black hover:bg-transparent hover:dark:bg-transparent px-4 py-2 rounded-4xl flex items-center gap-1">
+      <Button
+        onClick={onClick}
+        className={`
+          rounded-3xl px-4 h-full border-0 bg-white dark:bg-[#1e1e1e]
+          text-black dark:text-white
+          hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-purple-500
+          ${innerClassName}
+        `}
+      >
         {children}
-      </div>
-    </button>
+      </Button>
+    </div>
   );
 };
 

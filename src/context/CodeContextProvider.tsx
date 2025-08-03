@@ -8,6 +8,7 @@ export type CodeObjectType = {
   language: LanguageType;
   input: string;
   title: string;
+  createdBy?: string;
 };
 
 export type EditorSettingsType = {
@@ -39,8 +40,8 @@ export const CodeContext = createContext({
   setEditorSettings: (settings: EditorSettingsType) => {},
   result: null as CompileResultType | null,
   setResult: (result: CompileResultType | null) => {},
-  loading: false,
-  setLoading: (loading: boolean) => {},
+  codeList: null as CodeObjectType[] | null,
+  setCodeList: (codeList: CodeObjectType[] | null) => {},
 });
 
 const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -49,8 +50,8 @@ const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
     fontSize: 16,
     expectedOutput: "",
   });
+  const [codeList, setCodeList] = useState<CodeObjectType[] | null>(null);
   const [result, setResult] = useState<CompileResultType | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     try {
@@ -78,8 +79,8 @@ const CodeContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setEditorSettings,
         result,
         setResult,
-        loading,
-        setLoading,
+        codeList,
+        setCodeList,
       }}
     >
       {children}
