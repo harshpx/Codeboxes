@@ -4,9 +4,11 @@ import { IoPlay } from "react-icons/io5";
 import Loader from "@/components/custom/Loader";
 import { compile } from "@/services/compile";
 import { toast } from "sonner";
+import { useAuthContext } from "@/context/AuthContextProvider";
 
 const RunCode = () => {
-  const { codeObject, setResult, loading, setLoading } = useCodeContext();
+  const { codeObject, setResult } = useCodeContext();
+  const { loading, setLoading } = useAuthContext();
 
   const runCode = async () => {
     try {

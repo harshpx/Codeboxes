@@ -1,5 +1,4 @@
 import { useAuthContext } from "@/context/AuthContextProvider";
-import { useCodeContext } from "@/context/CodeContextProvider";
 import useDebounce from "@/hooks/useDebounce";
 import { signupSchema } from "@/lib/validations";
 import { checkEmailAvailability, checkUsernameAvailability, registerUser } from "@/services/user";
@@ -16,8 +15,7 @@ import ButtonWithLoader from "./ButtonWithLoader";
 type SignupFormData = z.infer<typeof signupSchema>;
 
 const SignupForm: FC = () => {
-  const { loading, setLoading } = useCodeContext();
-  const { setUser } = useAuthContext();
+  const { setUser, loading, setLoading } = useAuthContext();
 
   const [inputUsername, setInputUsername] = useState("");
   const [isCheckingUsername, setIsCheckingUsername] = useState(false);

@@ -56,3 +56,16 @@ export const checkEmailAvailability = async (email: string) => {
   const rawData = await fetch(url, options);
   return await rawData.json();
 };
+
+export const getUserDetails = async (token: string) => {
+  const url = `${baseUrl}/api/v1/users`;
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const res = await fetch(url, options);
+  return await res.json();
+};

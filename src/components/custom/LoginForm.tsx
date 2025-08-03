@@ -1,6 +1,5 @@
 "use client";
 import { useAuthContext } from "@/context/AuthContextProvider";
-import { useCodeContext } from "@/context/CodeContextProvider";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +14,7 @@ import ButtonWithLoader from "./ButtonWithLoader";
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginForm: FC = () => {
-  const { setUser } = useAuthContext();
-  const { loading, setLoading } = useCodeContext();
+  const { setUser, loading, setLoading } = useAuthContext();
   const [responseMessage, setResponseMessage] = useState("");
   const [responseError, setResponseError] = useState(false);
 
