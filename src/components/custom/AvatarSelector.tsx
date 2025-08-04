@@ -16,6 +16,7 @@ import { useAuthContext } from "@/context/AuthContextProvider";
 import { useStateContext } from "@/context/StateContextProvider";
 import { updateAvatar } from "@/services/user";
 import { toast } from "sonner";
+import StyledButton from "./StyledButton";
 
 type AvatarSelectorProps = {
   className?: string;
@@ -65,9 +66,10 @@ const AvatarSelector: FC<AvatarSelectorProps> = ({ className }) => {
         <LuPencil
           onClick={() => setOpen(true)}
           className={`
-            bg-black w-10 h-8 p-1 
-            lg:w-14 lg:h-10 lg:p-2 
-            border-2 border-white rounded-full cursor-pointer 
+            text-black dark:text-white
+            bg-neutral-100 dark:bg-black w-10 h-8 p-1 
+            lg:w-12 lg:h-9 lg:p-2 
+            border-2 border-neutral-700 dark:border-white rounded-full cursor-pointer 
             ${className}
           `}
         />
