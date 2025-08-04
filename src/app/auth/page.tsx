@@ -111,7 +111,7 @@ const AuthPage: FC = () => {
           className={`
             ${isLargeScreen ? "w-1/2 self-center" : "w-full sm:w-[600px] self-start"} 
             flex flex-col items-center justify-center py-4 rounded-xl
-            transition-transform duration-500 ease-in-out 
+            transition-transform duration-100 ease-in-out 
             ${isLargeScreen ? "bg-none" : "bg-white dark:bg-[#1e1e1e]"}
             ${activePage === "signup" && isLargeScreen ? "-translate-x-full" : "translate-x-0"}
           `}
