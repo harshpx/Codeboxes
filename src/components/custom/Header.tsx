@@ -23,34 +23,67 @@ const Header: FC = () => {
       return (
         <>
           {pathName === "/editor" && (
-            <StyledButton onClick={() => router.push("/dashboard")}>
-              <p className="text-[10px] font-[500]">&lt;/&gt;</p>
-              <p>Codes</p>
-            </StyledButton>
+            <>
+              <StyledButton onClick={() => router.push("/dashboard")}>
+                <p className="text-[10px] font-[500]">&lt;/&gt;</p>
+                <p>Codes</p>
+              </StyledButton>
+              <StyledButton
+                onClick={() => router.push("/settings")}
+                innerClassName="flex items-center gap-2 pl-0"
+              >
+                <Image
+                  src={user?.dp || "/codeboxes-cyan.png"}
+                  alt="User Avatar"
+                  width={45}
+                  height={45}
+                />
+                <p>{user?.username}</p>
+              </StyledButton>
+            </>
           )}
           {pathName === "/dashboard" && (
-            <StyledButton
-              onClick={() => {
-                setCodeObject(defaultCodeObject);
-                router.push("/editor");
-              }}
-            >
-              <LuPlus />
-              <p>{isSmallScreen ? "New" : "New code"}</p>
-            </StyledButton>
+            <>
+              <StyledButton
+                onClick={() => {
+                  setCodeObject(defaultCodeObject);
+                  router.push("/editor");
+                }}
+              >
+                <LuPlus />
+                <p>{isSmallScreen ? "New" : "New code"}</p>
+              </StyledButton>
+              <StyledButton
+                onClick={() => router.push("/settings")}
+                innerClassName="flex items-center gap-2 pl-0"
+              >
+                <Image
+                  src={user?.dp || "/codeboxes-cyan.png"}
+                  alt="User Avatar"
+                  width={45}
+                  height={45}
+                />
+                <p>{user?.username}</p>
+              </StyledButton>
+            </>
           )}
-          <StyledButton
-            onClick={() => router.push("/settings")}
-            innerClassName="flex items-center gap-2 pl-0"
-          >
-            <Image
-              src={user?.dp || "/codeboxes-cyan.png"}
-              alt="User Avatar"
-              width={45}
-              height={45}
-            />
-            <p>{user?.username}</p>
-          </StyledButton>
+          {pathName === "/settings" && (
+            <>
+              <StyledButton
+                onClick={() => {
+                  setCodeObject(defaultCodeObject);
+                  router.push("/editor");
+                }}
+              >
+                <LuPlus />
+                <p>{isSmallScreen ? "New" : "New code"}</p>
+              </StyledButton>
+              <StyledButton onClick={() => router.push("/dashboard")}>
+                <p className="text-[10px] font-[500]">&lt;/&gt;</p>
+                <p>Codes</p>
+              </StyledButton>
+            </>
+          )}
         </>
       );
     } else {

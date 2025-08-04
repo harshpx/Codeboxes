@@ -69,3 +69,17 @@ export const getUserDetails = async (token: string) => {
   const res = await fetch(url, options);
   return await res.json();
 };
+
+export const updateAvatar = async (token: string, avatarUrl: string) => {
+  const url = `${baseUrl}/api/v1/users`;
+  const options = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ dp: avatarUrl }),
+  };
+  const res = await fetch(url, options);
+  return await res.json();
+};

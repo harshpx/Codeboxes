@@ -192,3 +192,18 @@ puts "Hello, Ruby!"
 export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js"];
 
 export const baseUrl = "https://codeboxes.152.42.158.94.nip.io";
+
+export const avatarList = [
+  "https://i.imgur.com/8GO2mo5.png",
+  "https://i.imgur.com/DX92Le8.png",
+  "https://i.imgur.com/w6quc8D.png",
+  "https://i.imgur.com/5KFWFer.png",
+  "https://i.imgur.com/hZEkVPz.png",
+  "https://i.imgur.com/uaTcVQo.png",
+  "https://i.imgur.com/ZIPnYJU.png",
+  "https://i.imgur.com/994qIEz.png",
+  "https://i.imgur.com/xv7TdK9.png",
+  "https://i.imgur.com/jW7j7H9.png",
+  "https://i.imgur.com/Wx95aDx.png",
+  "https://i.imgur.com/yG2mnU5.png",
+];
