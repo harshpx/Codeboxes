@@ -18,6 +18,7 @@ import Loader from "@/components/custom/Loader";
 import DeleteCodeButton from "@/components/custom/DeleteCodeButton";
 import NewCodeButton from "@/components/custom/NewCodeButton";
 import { useStateContext } from "@/context/StateContextProvider";
+import TitleInput from "@/components/custom/TitleInput";
 
 const Page = () => {
   const { codeObject, setCodeObject, editorSettings, setEditorSettings, result, setResult } =
@@ -28,6 +29,7 @@ const Page = () => {
 
   const [showTestcaseResult, setShowTestcaseResult] = useState(false);
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
+  const isTinyScreen = useMediaQuery("(max-width: 520px)");
 
   useEffect(() => {
     setShowTestcaseResult(true);
@@ -56,6 +58,9 @@ const Page = () => {
                 <div className="flex items-center gap-1">
                   <LanguageSelector />
                   <FontSizeButtons />
+                  {isAuthorized && isTinyScreen && (
+                    <TitleInput outerClassName="rounded-md" innerClassName="rounded-md" />
+                  )}
                 </div>
                 <div className="flex items-center gap-1">
                   {isAuthorized && codeObject.id !== "" && <NewCodeButton />}

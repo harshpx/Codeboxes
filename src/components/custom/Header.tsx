@@ -17,6 +17,7 @@ const Header: FC = () => {
   const router = useRouter();
   const pathName = usePathname();
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
+  const isTinyScreen = useMediaQuery("(max-width: 520px)");
 
   const renderButtons = () => {
     if (isAuthorized) {
@@ -104,7 +105,7 @@ const Header: FC = () => {
           // className="border border-white px-2 py-1 rounded-2xl h-full"
         />
       </div>
-      {isAuthorized && pathName === "/editor" && (
+      {isAuthorized && pathName === "/editor" && !isTinyScreen && (
         <div className="grow">
           <TitleInput />
         </div>

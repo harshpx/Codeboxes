@@ -67,7 +67,7 @@ const AuthPage: FC = () => {
   return (
     <div className="relative grow w-full flex flex-col items-center justify-center transition-all duration-400 ease-in">
       <div
-        className={`absolute top-0 left-0 px-4 py-4 w-full flex items-center justify-between ${activePage === "signup" && isLargeScreen ? "" : "flex-row-reverse"}`}
+        className={`${isLargeScreen ? "absolute top-0 left-0" : "bg-gradient-to-l from-[#007cc4] to-purple-500"} px-4 py-4 w-full flex items-center justify-between ${activePage === "signup" && isLargeScreen ? "" : "flex-row-reverse"}`}
       >
         {isLargeScreen ? <ThemeSwitch2 /> : <ThemeSwitch3 />}
         {!isLargeScreen && <Logo size="sm" style="inline" fixColorWhite={true} />}
@@ -109,7 +109,7 @@ const AuthPage: FC = () => {
         )}
         <div
           className={`
-            ${isLargeScreen ? "w-1/2" : "w-full sm:w-[600px]"} self-center 
+            ${isLargeScreen ? "w-1/2 self-center" : "w-full sm:w-[600px] self-start"} 
             flex flex-col items-center justify-center py-4 rounded-xl
             transition-transform duration-500 ease-in-out 
             ${isLargeScreen ? "bg-none" : "bg-white dark:bg-[#1e1e1e]"}
