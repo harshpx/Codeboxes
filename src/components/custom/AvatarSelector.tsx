@@ -16,7 +16,6 @@ import { useAuthContext } from "@/context/AuthContextProvider";
 import { useStateContext } from "@/context/StateContextProvider";
 import { updateAvatar } from "@/services/user";
 import { toast } from "sonner";
-import StyledButton from "./StyledButton";
 
 type AvatarSelectorProps = {
   className?: string;
