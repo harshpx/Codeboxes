@@ -4,7 +4,6 @@ import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
 import { currentlySupportedLanguages } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
 import ThemeSwitch2 from "@/components/custom/ThemeSwitch2";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { FC, useEffect } from "react";
@@ -12,15 +11,17 @@ import Loader from "@/components/custom/Loader";
 import { useStateContext } from "@/context/StateContextProvider";
 import LogoColored from "@/components/custom/LogoColored";
 import StyledButton from "@/components/custom/StyledButton";
+import useNavigate from "@/hooks/useNavigate";
 
 const Home: FC = () => {
-  const router = useRouter();
   const { isAuthorized } = useAuthContext();
-  const { loading } = useStateContext();
+  const { loading, setLoading } = useStateContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(false);
     if (isAuthorized) {
-      router.push("/dashboard");
+      navigate("/dashboard");
     }
   }, [isAuthorized]);
 
@@ -56,14 +57,14 @@ const Home: FC = () => {
             <StyledButton
               outerClassName="h-10 rounded-3xl"
               innerClassName="rounded-3xl"
-              onClick={() => router.push("/auth")}
+              onClick={() => navigate("/auth")}
             >
               Login/Register
             </StyledButton>
             <StyledButton
               outerClassName="h-10 rounded-3xl"
               innerClassName="rounded-3xl"
-              onClick={() => router.push("/editor")}
+              onClick={() => navigate("/editor")}
             >
               Try out now <ArrowRight />
             </StyledButton>

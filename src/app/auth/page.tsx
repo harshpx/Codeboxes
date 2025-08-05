@@ -17,8 +17,9 @@ import ThemeSwitch3 from "@/components/custom/ThemeSwitch3";
 import LoginForm from "@/components/custom/LoginForm";
 import SignupForm from "@/components/custom/SignupForm";
 import { useAuthContext } from "@/context/AuthContextProvider";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useStateContext } from "@/context/StateContextProvider";
+import useNavigate from "@/hooks/useNavigate";
 
 const tabs = [
   {
@@ -52,12 +53,14 @@ const tabs = [
 const AuthPage: FC = () => {
   // const isMobile = useMediaQuery("(max-width: 640px)");
   // const isSmallScreen = useMediaQuery("(max-width: 450px)");
+  const { setLoading } = useStateContext();
   const { isAuthorized } = useAuthContext();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(false);
     if (isAuthorized) {
-      router.push("/dashboard");
+      navigate("/dashboard");
     }
   }, [isAuthorized]);
 

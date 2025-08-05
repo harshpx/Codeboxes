@@ -7,7 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vs, vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { syntaxHighlighterLanguage } from "@/lib/utils";
 import { FiPlusCircle } from "react-icons/fi";
-import { useRouter } from "next/navigation";
+import useNavigate from "@/hooks/useNavigate";
 
 type CodeCardProps = {
   codeObject?: CodeObjectType;
@@ -18,11 +18,11 @@ type CodeCardProps = {
 const CodeCard: FC<CodeCardProps> = ({ codeObject, outerClassName = "", innerClassName = "" }) => {
   const { theme } = useTheme();
   const { setCodeObject } = useCodeContext();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const cardClickHandler = () => {
     setCodeObject(codeObject || defaultCodeObject);
-    router.push("/editor");
+    navigate("/editor");
   };
 
   return (

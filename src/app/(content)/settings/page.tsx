@@ -6,21 +6,20 @@ import { Card } from "@/components/ui/card";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { useStateContext } from "@/context/StateContextProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import useNavigate from "@/hooks/useNavigate";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { FC, useEffect } from "react";
 
 const SettingsPage: FC = () => {
   const { user, isAuthorized, logout } = useAuthContext();
-  const { loading } = useStateContext();
-  const router = useRouter();
+  const { loading, setLoading } = useStateContext();
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthorized) {
-      router.push("/settings");
-    } else {
-      router.push("/");
+    setLoading(false);
+    if (!isAuthorized) {
+      navigate("/");
     }
   }, [isAuthorized]);
 

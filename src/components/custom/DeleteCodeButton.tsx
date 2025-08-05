@@ -3,8 +3,8 @@ import { useAuthContext } from "@/context/AuthContextProvider";
 import { CodeObjectType, defaultCodeObject, useCodeContext } from "@/context/CodeContextProvider";
 import { useStateContext } from "@/context/StateContextProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import useNavigate from "@/hooks/useNavigate";
 import { deleteCode } from "@/services/code";
-import { useRouter } from "next/navigation";
 import { IoTrashBin } from "react-icons/io5";
 import { toast } from "sonner";
 
@@ -13,7 +13,7 @@ const DeleteCodeButton = () => {
   const { codeObject, setCodeObject, codeList, setCodeList } = useCodeContext();
   const { user, logout } = useAuthContext();
   const { setLoading } = useStateContext();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const handleCodeDelete = async () => {
     if (!!user && !!user.token && codeObject.id) {
@@ -25,7 +25,7 @@ const DeleteCodeButton = () => {
             codeList?.filter(code => code.id !== codeObject.id) || null;
           setCodeList(updatedCodeList);
           setCodeObject(defaultCodeObject);
-          router.push("/dashboard");
+          navigate("/dashboard");
           toast.success("Code deleted successfully", {
             duration: 2000,
             description: "Your code has been deleted",
