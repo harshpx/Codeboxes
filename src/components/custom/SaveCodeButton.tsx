@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { CodeObjectType, useCodeContext } from "@/context/CodeContextProvider";
 import { createCode, updateCode } from "@/services/code";
-import { IoSave } from "react-icons/io5";
 import { toast } from "sonner";
 import Loader from "./Loader";
 import { FC } from "react";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useStateContext } from "@/context/StateContextProvider";
 import useNavigate from "@/hooks/useNavigate";
+import { Save } from "lucide-react";
 
 const SaveCodeButton: FC = () => {
   const { isAuthorized, user, logout } = useAuthContext();
@@ -102,7 +102,7 @@ const SaveCodeButton: FC = () => {
     <>
       {loading && <Loader />}
       <Button onClick={handleSave} variant="outline">
-        <IoSave />
+        <Save />
         {!isSmallScreen && <p>Save</p>}
       </Button>
     </>

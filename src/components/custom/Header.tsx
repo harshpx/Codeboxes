@@ -6,11 +6,11 @@ import { FC } from "react";
 import { defaultCodeObject, useCodeContext } from "@/context/CodeContextProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import StyledButton from "./StyledButton";
-import { LuPlus } from "react-icons/lu";
 import ThemeSwitch2 from "./ThemeSwitch2";
 import LogoColored from "./LogoColored";
 import Image from "next/image";
 import useNavigate from "@/hooks/useNavigate";
+import { Plus } from "lucide-react";
 
 const Header: FC = () => {
   const { user, isAuthorized } = useAuthContext();
@@ -52,7 +52,7 @@ const Header: FC = () => {
                   navigate("/editor");
                 }}
               >
-                <LuPlus />
+                <Plus />
                 <p>{isSmallScreen ? "New" : "New code"}</p>
               </StyledButton>
               <StyledButton
@@ -77,7 +77,7 @@ const Header: FC = () => {
                   navigate("/editor");
                 }}
               >
-                <LuPlus />
+                <Plus />
                 <p>{isSmallScreen ? "New" : "New code"}</p>
               </StyledButton>
               <StyledButton onClick={() => navigate("/dashboard")}>

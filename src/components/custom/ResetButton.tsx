@@ -1,9 +1,9 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { boilerplates } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { RiResetLeftFill } from "react-icons/ri";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { RotateCcw } from "lucide-react";
 
 const ResetButton = () => {
   const { codeObject, setCodeObject, codeList, editorSettings, setEditorSettings, setResult } =
@@ -41,7 +41,7 @@ const ResetButton = () => {
 
   return (
     <Button variant="outline" onClick={handleReset}>
-      <RiResetLeftFill />
+      <RotateCcw />
       {!isSmallScreen && <p>Reset</p>}
     </Button>
   );

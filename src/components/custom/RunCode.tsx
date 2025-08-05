@@ -1,10 +1,10 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { Button } from "@/components/ui/button";
-import { IoPlay } from "react-icons/io5";
 import Loader from "@/components/custom/Loader";
 import { compile } from "@/services/compile";
 import { toast } from "sonner";
 import { useStateContext } from "@/context/StateContextProvider";
+import { Play } from "lucide-react";
 
 const RunCode = () => {
   const { codeObject, setResult } = useCodeContext();
@@ -51,7 +51,7 @@ const RunCode = () => {
           "
         >
           Run
-          <IoPlay />
+          <Play />
         </Button>
       </div>
       {loading && <Loader />}

@@ -3,7 +3,6 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 import { FlipWords } from "@/components/ui/flip-words";
 import GradientTextShift from "@/components/ui/gradient-shift-text";
 import { currentlySupportedLanguages } from "@/lib/utils";
-import { ArrowRight } from "lucide-react";
 import ThemeSwitch2 from "@/components/custom/ThemeSwitch2";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { FC, useEffect } from "react";
@@ -12,6 +11,7 @@ import { useStateContext } from "@/context/StateContextProvider";
 import LogoColored from "@/components/custom/LogoColored";
 import StyledButton from "@/components/custom/StyledButton";
 import useNavigate from "@/hooks/useNavigate";
+import { ArrowRight } from "lucide-react";
 
 const Home: FC = () => {
   const { isAuthorized } = useAuthContext();

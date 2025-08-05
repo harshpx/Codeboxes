@@ -1,6 +1,6 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { Button } from "@/components/ui/button";
-import { LuAArrowDown, LuAArrowUp } from "react-icons/lu";
+import { AArrowDown, AArrowUp } from "lucide-react";
 
 const FontSizeButtons = () => {
   const { editorSettings, setEditorSettings } = useCodeContext();
@@ -29,7 +29,7 @@ const FontSizeButtons = () => {
         onClick={decreaseFontSize}
         disabled={editorSettings.fontSize <= 14}
       >
-        <LuAArrowDown />
+        <AArrowDown />
       </Button>
       <Button
         variant="outline"
@@ -43,7 +43,7 @@ const FontSizeButtons = () => {
         onClick={increaseFontSize}
         disabled={editorSettings.fontSize >= 24}
       >
-        <LuAArrowUp />
+        <AArrowUp />
       </Button>
     </div>
   );

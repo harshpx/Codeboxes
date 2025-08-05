@@ -16,9 +16,8 @@ import {
 } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { HiChevronUpDown } from "react-icons/hi2";
-import { HiCheck } from "react-icons/hi";
 import { useCodeContext } from "@/context/CodeContextProvider";
+import { Check, ChevronsUpDown } from "lucide-react";
 
 const LanguageSelector = () => {
   const [open, setOpen] = useState(false);
@@ -34,7 +33,7 @@ const LanguageSelector = () => {
           className="w-[120px] h-9 justify-between"
         >
           {languageLabels[codeObject.language]}
-          <HiChevronUpDown className="shrink-0" />
+          <ChevronsUpDown className="shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -62,7 +61,7 @@ const LanguageSelector = () => {
                   }}
                 >
                   {languageLabels[lang]}
-                  <HiCheck
+                  <Check
                     className={`ml-auto ${codeObject.language === lang ? "opacity-100" : "opacity-0"}`}
                   />
                 </CommandItem>

@@ -5,7 +5,7 @@ import { useStateContext } from "@/context/StateContextProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import useNavigate from "@/hooks/useNavigate";
 import { deleteCode } from "@/services/code";
-import { IoTrashBin } from "react-icons/io5";
+import { Trash } from "lucide-react";
 import { toast } from "sonner";
 
 const DeleteCodeButton = () => {
@@ -48,7 +48,7 @@ const DeleteCodeButton = () => {
 
   return (
     <Button onClick={handleCodeDelete} variant="outline">
-      <IoTrashBin />
+      <Trash />
       {!isSmallScreen && <p>Delete</p>}
     </Button>
   );

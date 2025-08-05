@@ -6,8 +6,8 @@ import { useTheme } from "@/context/ThemeProvider";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vs, vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { syntaxHighlighterLanguage } from "@/lib/utils";
-import { FiPlusCircle } from "react-icons/fi";
 import useNavigate from "@/hooks/useNavigate";
+import { PlusCircle } from "lucide-react";
 
 type CodeCardProps = {
   codeObject?: CodeObjectType;
@@ -67,7 +67,7 @@ const CodeCard: FC<CodeCardProps> = ({ codeObject, outerClassName = "", innerCla
             </SyntaxHighlighter>
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-              <FiPlusCircle size={60} className="text-white" />
+              <PlusCircle size={60} className="text-white" />
             </div>
           )}
         </CardContent>
