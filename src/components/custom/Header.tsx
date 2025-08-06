@@ -98,7 +98,7 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="w-full h-[52px] px-4 gap-2 flex items-center justify-between bg-transparent">
+    <header className="w-full h-[52px] px-4 gap-2 flex items-center justify-between bg-transparent overflow-auto">
       <div className="flex items-center gap-2 justify-start">
         <LogoColored
           size="sm"

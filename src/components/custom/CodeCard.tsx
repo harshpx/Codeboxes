@@ -39,7 +39,7 @@ const CodeCard: FC<CodeCardProps> = ({ codeObject, outerClassName = "", innerCla
       <Card
         onClick={cardClickHandler}
         className={`
-          h-full w-full gap-1 px-6 py-6 cursor-pointer 
+          h-full w-full rounded-2xl gap-1 px-6 py-6 cursor-pointer 
           ${codeObject ? "bg-neutral-100 dark:bg-black" : "bg-transparent"}
           ${innerClassName}
         `}

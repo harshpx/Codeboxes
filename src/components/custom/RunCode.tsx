@@ -45,7 +45,7 @@ const RunCode = () => {
         <Button
           onClick={runCode}
           className="
-            p-0 h-full border-0 bg-white dark:bg-[#1e1e1e]
+            p-0 h-full border-0 rounded-md bg-white dark:bg-[#1e1e1e]
             text-black dark:text-white
             hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-purple-500
           "
