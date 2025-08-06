@@ -9,9 +9,9 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { Loader2 } from "lucide-react";
 import ButtonWithLoader from "./ButtonWithLoader";
 import { useStateContext } from "@/context/StateContextProvider";
+import { Loader } from "lucide-react";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
@@ -168,7 +168,7 @@ const SignupForm: FC = () => {
                     }}
                   />
                 </FormControl>
-                {isCheckingUsername && <Loader2 className="w-4 aspect-square animate-spin" />}
+                {isCheckingUsername && <Loader className="w-4 aspect-square animate-spin" />}
 
                 {formController.formState.errors.username ? (
                   <FormMessage className="text-[12px] text-red-600" />
@@ -211,7 +211,7 @@ const SignupForm: FC = () => {
                     }}
                   />
                 </FormControl>
-                {isCheckingEmail && <Loader2 className="w-4 aspect-square animate-spin" />}
+                {isCheckingEmail && <Loader className="w-4 aspect-square animate-spin" />}
                 {formController.formState.errors.email ? (
                   <FormMessage className="text-red-600 text-[12px]" />
                 ) : !isCheckingEmail && emailMessage ? (

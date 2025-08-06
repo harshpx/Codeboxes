@@ -1,7 +1,7 @@
 "use client";
 import { FC, ReactNode } from "react";
 import { Button } from "../ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader } from "lucide-react";
 
 type ButtonWithLoaderProps = {
   children: ReactNode;
@@ -18,7 +18,7 @@ const ButtonWithLoader: FC<ButtonWithLoaderProps> = ({
 }) => {
   return (
     <Button type={type} className={className}>
-      {loading ? <Loader2 className="w-4 aspect-square animate-spin text-md" /> : children}
+      {loading ? <Loader className="w-4 aspect-square animate-spin text-md" /> : children}
     </Button>
   );
 };

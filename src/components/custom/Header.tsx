@@ -1,23 +1,24 @@
 "use client";
 import TitleInput from "@/components/custom/TitleInput";
 import { useAuthContext } from "@/context/AuthContextProvider";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { FC } from "react";
 import { defaultCodeObject, useCodeContext } from "@/context/CodeContextProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import StyledButton from "./StyledButton";
-import { LuPlus } from "react-icons/lu";
 import ThemeSwitch2 from "./ThemeSwitch2";
 import LogoColored from "./LogoColored";
 import Image from "next/image";
+import useNavigate from "@/hooks/useNavigate";
+import { Plus } from "lucide-react";
 
 const Header: FC = () => {
   const { user, isAuthorized } = useAuthContext();
   const { setCodeObject } = useCodeContext();
-  const router = useRouter();
   const pathName = usePathname();
   const isSmallScreen = useMediaQuery("(max-width: 640px)");
   const isTinyScreen = useMediaQuery("(max-width: 520px)");
+  const navigate = useNavigate();
 
   const renderButtons = () => {
     if (isAuthorized) {
@@ -25,12 +26,12 @@ const Header: FC = () => {
         <>
           {pathName === "/editor" && (
             <>
-              <StyledButton onClick={() => router.push("/dashboard")}>
+              <StyledButton onClick={() => navigate("/dashboard")}>
                 <p className="text-[10px] font-[500]">&lt;/&gt;</p>
                 <p>Codes</p>
               </StyledButton>
               <StyledButton
-                onClick={() => router.push("/settings")}
+                onClick={() => navigate("/settings")}
                 innerClassName="flex items-center gap-2 pl-0"
               >
                 <Image
@@ -48,14 +49,14 @@ const Header: FC = () => {
               <StyledButton
                 onClick={() => {
                   setCodeObject(defaultCodeObject);
-                  router.push("/editor");
+                  navigate("/editor");
                 }}
               >
-                <LuPlus />
+                <Plus />
                 <p>{isSmallScreen ? "New" : "New code"}</p>
               </StyledButton>
               <StyledButton
-                onClick={() => router.push("/settings")}
+                onClick={() => navigate("/settings")}
                 innerClassName="flex items-center gap-2 pl-0"
               >
                 <Image
@@ -73,13 +74,13 @@ const Header: FC = () => {
               <StyledButton
                 onClick={() => {
                   setCodeObject(defaultCodeObject);
-                  router.push("/editor");
+                  navigate("/editor");
                 }}
               >
-                <LuPlus />
+                <Plus />
                 <p>{isSmallScreen ? "New" : "New code"}</p>
               </StyledButton>
-              <StyledButton onClick={() => router.push("/dashboard")}>
+              <StyledButton onClick={() => navigate("/dashboard")}>
                 <p className="text-[10px] font-[500]">&lt;/&gt;</p>
                 <p>Codes</p>
               </StyledButton>
@@ -90,14 +91,14 @@ const Header: FC = () => {
     } else {
       return (
         <>
-          <StyledButton onClick={() => router.push("/auth")}>Login</StyledButton>
+          <StyledButton onClick={() => navigate("/auth")}>Login</StyledButton>
         </>
       );
     }
   };
 
   return (
-    <header className="w-full h-[52px] px-4 gap-2 flex items-center justify-between bg-transparent">
+    <header className="w-full h-[52px] px-4 gap-2 flex items-center justify-between bg-transparent overflow-auto">
       <div className="flex items-center gap-2 justify-start">
         <LogoColored
           size="sm"

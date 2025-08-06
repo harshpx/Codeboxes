@@ -27,7 +27,7 @@ const StyledButton: FC<StyledButtonProps> = ({
       <Button
         onClick={onClick}
         className={`
-          rounded-3xl px-4 h-full border-0 bg-white dark:bg-[#1e1e1e]
+          rounded-4xl px-4 h-full border-0 bg-white dark:bg-[#1e1e1e]
           text-black dark:text-white
           hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-purple-500
           ${innerClassName}

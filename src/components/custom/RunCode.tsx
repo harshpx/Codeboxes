@@ -1,10 +1,10 @@
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { Button } from "@/components/ui/button";
-import { IoPlay } from "react-icons/io5";
 import Loader from "@/components/custom/Loader";
 import { compile } from "@/services/compile";
 import { toast } from "sonner";
 import { useStateContext } from "@/context/StateContextProvider";
+import { Play } from "lucide-react";
 
 const RunCode = () => {
   const { codeObject, setResult } = useCodeContext();
@@ -45,13 +45,13 @@ const RunCode = () => {
         <Button
           onClick={runCode}
           className="
-            p-0 h-full border-0 bg-white dark:bg-[#1e1e1e]
+            p-0 h-full border-0 rounded-md bg-white dark:bg-[#1e1e1e]
             text-black dark:text-white
             hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-purple-500
           "
         >
           Run
-          <IoPlay />
+          <Play />
         </Button>
       </div>
       {loading && <Loader />}

@@ -25,13 +25,14 @@ const Page = () => {
     useCodeContext();
   const { theme } = useTheme();
   const { isAuthorized } = useAuthContext();
-  const { loading } = useStateContext();
+  const { loading, setLoading } = useStateContext();
 
   const [showTestcaseResult, setShowTestcaseResult] = useState(false);
   const isSmallScreen = useMediaQuery("(max-width: 768px)");
   const isTinyScreen = useMediaQuery("(max-width: 520px)");
 
   useEffect(() => {
+    setLoading(false);
     setShowTestcaseResult(true);
   }, [result]);
 

@@ -9,13 +9,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { LuPencil } from "react-icons/lu";
 import { avatarList } from "@/lib/utils";
 import Image from "next/image";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { useStateContext } from "@/context/StateContextProvider";
 import { updateAvatar } from "@/services/user";
 import { toast } from "sonner";
+import { Pencil } from "lucide-react";
 
 type AvatarSelectorProps = {
   className?: string;
@@ -62,7 +62,7 @@ const AvatarSelector: FC<AvatarSelectorProps> = ({ className }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <LuPencil
+        <Pencil
           onClick={() => setOpen(true)}
           className={`
             text-black dark:text-white

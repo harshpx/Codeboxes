@@ -3,7 +3,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import { FC } from "react";
 import { Button } from "../ui/button";
 import { defaultCodeObject, useCodeContext } from "@/context/CodeContextProvider";
-import { LuPlus } from "react-icons/lu";
+import { Plus } from "lucide-react";
 
 const NewCodeButton: FC = () => {
   const { setCodeObject } = useCodeContext();
@@ -14,7 +14,7 @@ const NewCodeButton: FC = () => {
   };
   return (
     <Button onClick={handleNewCode} variant="outline">
-      <LuPlus />
+      <Plus />
       {!isSmallScreen && <p>New</p>}
     </Button>
   );

@@ -4,20 +4,19 @@ import Loader from "@/components/custom/Loader";
 import { useAuthContext } from "@/context/AuthContextProvider";
 import { useCodeContext } from "@/context/CodeContextProvider";
 import { useStateContext } from "@/context/StateContextProvider";
-import { useRouter } from "next/navigation";
+import useNavigate from "@/hooks/useNavigate";
 import { FC, useEffect } from "react";
 
 const Dashboard: FC = () => {
   const { isAuthorized } = useAuthContext();
   const { codeList } = useCodeContext();
-  const { loading } = useStateContext();
-  const router = useRouter();
+  const { loading, setLoading } = useStateContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthorized) {
-      router.push("/dashboard");
-    } else {
-      router.push("/");
+    setLoading(false);
+    if (!isAuthorized) {
+      navigate("/");
     }
   }, [isAuthorized]);
 

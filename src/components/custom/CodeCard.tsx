@@ -6,8 +6,8 @@ import { useTheme } from "@/context/ThemeProvider";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vs, vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { syntaxHighlighterLanguage } from "@/lib/utils";
-import { FiPlusCircle } from "react-icons/fi";
-import { useRouter } from "next/navigation";
+import useNavigate from "@/hooks/useNavigate";
+import { PlusCircle } from "lucide-react";
 
 type CodeCardProps = {
   codeObject?: CodeObjectType;
@@ -18,11 +18,11 @@ type CodeCardProps = {
 const CodeCard: FC<CodeCardProps> = ({ codeObject, outerClassName = "", innerClassName = "" }) => {
   const { theme } = useTheme();
   const { setCodeObject } = useCodeContext();
-  const router = useRouter();
+  const navigate = useNavigate();
 
   const cardClickHandler = () => {
     setCodeObject(codeObject || defaultCodeObject);
-    router.push("/editor");
+    navigate("/editor");
   };
 
   return (
@@ -39,7 +39,7 @@ const CodeCard: FC<CodeCardProps> = ({ codeObject, outerClassName = "", innerCla
       <Card
         onClick={cardClickHandler}
         className={`
-          h-full w-full gap-1 px-6 py-6 cursor-pointer 
+          h-full w-full rounded-2xl gap-1 px-6 py-6 cursor-pointer 
           ${codeObject ? "bg-neutral-100 dark:bg-black" : "bg-transparent"}
           ${innerClassName}
         `}
@@ -67,7 +67,7 @@ const CodeCard: FC<CodeCardProps> = ({ codeObject, outerClassName = "", innerCla
             </SyntaxHighlighter>
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-              <FiPlusCircle size={60} className="text-white" />
+              <PlusCircle size={60} className="text-white" />
             </div>
           )}
         </CardContent>

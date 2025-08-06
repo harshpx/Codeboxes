@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { FiSun, FiMoon } from "react-icons/fi";
 import { useTheme } from "@/context/ThemeProvider";
 import { FC } from "react";
+import { Moon, Sun } from "lucide-react";
 
 const ThemeSwitch3: FC = () => {
   const { theme, setTheme } = useTheme();
@@ -21,9 +21,9 @@ const ThemeSwitch3: FC = () => {
       "
     >
       {theme === "dark" ? (
-        <FiSun className="text-2xl text-white" />
+        <Sun className="text-2xl text-white" />
       ) : (
-        <FiMoon className="text-2xl text-black" />
+        <Moon className="text-2xl text-black" />
       )}
     </Button>
   );
