@@ -5,7 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// monnaco editor languages names
 export const languages = [
   "cpp",
   "java",
