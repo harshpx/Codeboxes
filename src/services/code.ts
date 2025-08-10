@@ -2,7 +2,7 @@ import { CodeObjectType } from "@/context/CodeContextProvider";
 import { baseUrl } from "@/lib/utils";
 
 export const getCodes = async (token: string) => {
-  const url = `${baseUrl}/api/v1/codes`;
+  const url = `${baseUrl}/crud-service/v1/codes`;
   const options = {
     method: "GET",
     headers: {
@@ -15,7 +15,7 @@ export const getCodes = async (token: string) => {
 };
 
 export const getCodeById = async (id: string, token: string) => {
-  const url = `${baseUrl}/api/v1/codes/${id}`;
+  const url = `${baseUrl}/crud-service/v1/codes/${id}`;
   const options = {
     method: "GET",
     headers: {
@@ -28,7 +28,7 @@ export const getCodeById = async (id: string, token: string) => {
 };
 
 export const createCode = async (data: CodeObjectType, token: string) => {
-  const url = `${baseUrl}/api/v1/codes`;
+  const url = `${baseUrl}/crud-service/v1/codes`;
   const options = {
     method: "POST",
     headers: {
@@ -42,7 +42,7 @@ export const createCode = async (data: CodeObjectType, token: string) => {
 };
 
 export const updateCode = async (data: CodeObjectType, token: string) => {
-  const url = `${baseUrl}/api/v1/codes`;
+  const url = `${baseUrl}/crud-service/v1/codes`;
   const options = {
     method: "PUT",
     headers: {
@@ -56,7 +56,7 @@ export const updateCode = async (data: CodeObjectType, token: string) => {
 };
 
 export const deleteCode = async (id: string, token: string) => {
-  const url = `${baseUrl}/api/v1/codes/${id}`;
+  const url = `${baseUrl}/crud-service/v1/codes/${id}`;
   const options = {
     method: "DELETE",
     headers: {

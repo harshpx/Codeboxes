@@ -1,7 +1,7 @@
 import { baseUrl } from "@/lib/utils";
 
 export const compile = async (code: string, language: string, input: string) => {
-  const url: string = `${baseUrl}/api/v1/execute`;
+  const url: string = `${baseUrl}/execution-service/v1/execute`;
   const options = {
     method: "POST",
     headers: {

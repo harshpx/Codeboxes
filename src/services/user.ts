@@ -1,7 +1,7 @@
 import { baseUrl } from "@/lib/utils";
 
 export const registerUser = async (username: string, email: string, password: string) => {
-  const url = `${baseUrl}/api/v1/users/register`;
+  const url = `${baseUrl}/crud-service/v1/users/register`;
   const options = {
     method: "POST",
     headers: {
@@ -18,7 +18,7 @@ export const registerUser = async (username: string, email: string, password: st
 };
 
 export const loginUser = async (identifier: string, password: string) => {
-  const url = `${baseUrl}/api/v1/users/login`;
+  const url = `${baseUrl}/crud-service/v1/users/login`;
   const options = {
     method: "POST",
     headers: {
@@ -34,7 +34,7 @@ export const loginUser = async (identifier: string, password: string) => {
 };
 
 export const checkUsernameAvailability = async (username: string) => {
-  const url = `${baseUrl}/api/v1/users/check-availability?username=${encodeURIComponent(username)}`;
+  const url = `${baseUrl}/crud-service/v1/users/check-availability?username=${encodeURIComponent(username)}`;
   const options = {
     method: "GET",
     headers: {
@@ -46,7 +46,7 @@ export const checkUsernameAvailability = async (username: string) => {
 };
 
 export const checkEmailAvailability = async (email: string) => {
-  const url = `${baseUrl}/api/v1/users/check-availability?email=${encodeURIComponent(email)}`;
+  const url = `${baseUrl}/crud-service/v1/users/check-availability?email=${encodeURIComponent(email)}`;
   const options = {
     method: "GET",
     headers: {
@@ -58,7 +58,7 @@ export const checkEmailAvailability = async (email: string) => {
 };
 
 export const getUserDetails = async (token: string) => {
-  const url = `${baseUrl}/api/v1/users`;
+  const url = `${baseUrl}/crud-service/v1/users`;
   const options = {
     method: "GET",
     headers: {
@@ -71,7 +71,7 @@ export const getUserDetails = async (token: string) => {
 };
 
 export const updateAvatar = async (token: string, avatarUrl: string) => {
-  const url = `${baseUrl}/api/v1/users`;
+  const url = `${baseUrl}/crud-service/v1/users`;
   const options = {
     method: "PATCH",
     headers: {
