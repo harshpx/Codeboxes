@@ -1,7 +1,12 @@
 import { useAuthContext } from "@/context/AuthContextProvider";
 import useDebounce from "@/hooks/useDebounce";
 import { signupSchema } from "@/lib/validations";
-import { checkEmailAvailability, checkUsernameAvailability, registerUser } from "@/services/user";
+import {
+  checkEmailAvailability,
+  checkUsernameAvailability,
+  registerUser,
+  sendOTP,
+} from "@/services/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -12,6 +17,7 @@ import { Input } from "../ui/input";
 import ButtonWithLoader from "./ButtonWithLoader";
 import { useStateContext } from "@/context/StateContextProvider";
 import { Loader } from "lucide-react";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
@@ -32,6 +38,60 @@ const SignupForm: FC = () => {
 
   const debouncedUsername: string = useDebounce(inputUsername, 800);
   const debouncedEmail: string = useDebounce(inputEmail, 800);
+
+  const [otp, setOtp] = useState<string>("");
+  const [otpSent, setOtpSent] = useState(false);
+
+  const handleOTPSend = async () => {
+    const usernameErrors =
+      !formController.getValues("username") ||
+      formController.formState.errors.username ||
+      usernameMessage.toLowerCase().includes("not");
+
+    if (usernameErrors) {
+      toast.error("Please enter a valid and available username", { duration: 2000 });
+      return;
+    }
+
+    const emailErrors =
+      !formController.getValues("email") ||
+      formController.formState.errors.email ||
+      emailMessage.toLowerCase().includes("not");
+
+    if (emailErrors) {
+      toast.error("Please enter a valid and available email to receive OTP", { duration: 2000 });
+      return;
+    }
+
+    const passwordErrors =
+      !formController.getValues("password") ||
+      formController.formState.errors.password ||
+      !formController.getValues("confirmPassword") ||
+      formController.formState.errors.confirmPassword;
+
+    if (passwordErrors) {
+      toast.error("Please enter a valid password and confirm it", { duration: 2000 });
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await sendOTP(inputEmail);
+      if (res.success) {
+        toast.success(res.response || "OTP sent to your email", {
+          duration: 2000,
+        });
+        setOtpSent(true);
+      }
+    } catch (error) {
+      toast.error((error as Error).message || "Failed to send OTP, try again", {
+        duration: 2000,
+      });
+      setOtpSent(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     // check username availability
@@ -108,9 +168,14 @@ const SignupForm: FC = () => {
       return;
     }
 
+    if (!otp || otp.length !== 6) {
+      toast.error("Please enter the 6-digit OTP sent to your email", { duration: 2000 });
+      return;
+    }
+
     try {
       setLoading(true);
-      const res = await registerUser(data.username, data.email, data.password);
+      const res = await registerUser(data.username, data.email, data.password, otp);
       if (res.success) {
         setUser(res.response);
         toast.success("Signup successful!", {
@@ -127,7 +192,9 @@ const SignupForm: FC = () => {
         description: "Please try again.",
         duration: 2000,
       });
-      setResponseMessage((error as Error).message);
+      setResponseMessage(
+        (error as Error).message.substring(0, 100) || "An error occurred during signup",
+      );
       setResponseError(true);
     } finally {
       setLoading(false);
@@ -266,7 +333,7 @@ const SignupForm: FC = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage className="text-red-600" />
+                <FormMessage className="text-red-600 text-[12px]" />
               </FormItem>
             )}
           />
@@ -278,13 +345,40 @@ const SignupForm: FC = () => {
             {responseMessage}
           </div>
         )}
-        <ButtonWithLoader
-          type="submit"
-          className="mt-4 w-1/2 sm:w-[150px] bg-gradient-to-r from-cyan-500 to-purple-500 hover:bg-gradient-to-l hover:from-cyan-500 hover:to-purple-500 text-white text-md"
-          loading={loading}
-        >
-          Register
-        </ButtonWithLoader>
+        {!otpSent && (
+          <ButtonWithLoader
+            type="button"
+            onClick={handleOTPSend}
+            loading={loading}
+            className="mt-4 w-1/2 sm:w-[150px] bg-gradient-to-r from-cyan-500 to-purple-500 hover:bg-gradient-to-l hover:from-cyan-500 hover:to-purple-500 text-white text-md"
+          >
+            Get OTP
+          </ButtonWithLoader>
+        )}
+        {otpSent && (
+          <div className="flex flex-col items-start justify-center gap-1 mt-4">
+            <div className="text-[14px] font-[500]">One time password</div>
+            <InputOTP maxLength={6} onChange={val => setOtp(val)} value={otp}>
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+        )}
+        {otpSent && (
+          <ButtonWithLoader
+            type="submit"
+            className="mt-4 w-1/2 sm:w-[150px] bg-gradient-to-r from-cyan-500 to-purple-500 hover:bg-gradient-to-l hover:from-cyan-500 hover:to-purple-500 text-white text-md"
+            loading={loading}
+          >
+            Register
+          </ButtonWithLoader>
+        )}
       </form>
     </Form>
   );

@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
+/* global process */
 // monnaco editor languages names
 export const languages = [
   "cpp",
@@ -191,7 +191,14 @@ puts "Hello, Ruby!"
 
 export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js"];
 
-export const baseUrl = "https://codeboxes.152.42.158.94.nip.io";
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_ENV === "prod") {
+    return "https://codeboxes.152.42.158.94.nip.io";
+  }
+  return "http://localhost:8080";
+};
+
+export const baseUrl = getBaseUrl();
 
 export const avatarList = [
   "https://i.imgur.com/8GO2mo5.png",
