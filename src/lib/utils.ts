@@ -191,7 +191,10 @@ puts "Hello, Ruby!"
 
 export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js"];
 
-export const baseUrl = "https://codeboxes.152.42.158.94.nip.io";
+export const baseUrl =
+  process.env.NEXT_PUBLIC_ENV === "prod"
+    ? "https://codeboxes.152.42.158.94.nip.io"
+    : "http://localhost:8080";
 // export const baseUrl = "http://localhost:8080";
 
 export const avatarList = [
