@@ -1,6 +1,24 @@
 import { baseUrl } from "@/lib/utils";
 
-export const registerUser = async (username: string, email: string, password: string) => {
+export const sendOTP = async (email: string) => {
+  const url = `${baseUrl}/api/v1/users/otp`;
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  };
+  const data = await fetch(url, options);
+  return await data.json();
+};
+
+export const registerUser = async (
+  username: string,
+  email: string,
+  password: string,
+  otp: string,
+) => {
   const url = `${baseUrl}/api/v1/users/register`;
   const options = {
     method: "POST",
@@ -11,6 +29,7 @@ export const registerUser = async (username: string, email: string, password: st
       username,
       email,
       password,
+      otp,
     }),
   };
   const data = await fetch(url, options);
