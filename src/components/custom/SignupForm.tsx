@@ -227,6 +227,8 @@ const SignupForm: FC = () => {
                     onChange={e => {
                       field.onChange(e);
                       setInputUsername(e.target.value);
+                      setOtpSent(false);
+                      setOtp("");
                       if (e.target.value) {
                         setUsernameMessage("");
                         setResponseMessage("");
@@ -270,6 +272,8 @@ const SignupForm: FC = () => {
                     onChange={e => {
                       field.onChange(e);
                       setInputEmail(e.target.value);
+                      setOtpSent(false);
+                      setOtp("");
                       if (e.target.value) {
                         setEmailMessage("");
                         setResponseMessage("");
