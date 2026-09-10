@@ -192,8 +192,8 @@ puts "Hello, Ruby!"
 export const currentlySupportedLanguages: LanguageType[] = ["c", "cpp", "java", "py", "js"];
 
 const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_ENV === "prod") {
-    return "https://codeboxes.152.42.158.94.nip.io";
+  if (process.env.NEXT_PUBLIC_ENV === "PROD") {
+    return "https://api.codeboxes.in";
   }
   return "http://localhost:8080";
 };
